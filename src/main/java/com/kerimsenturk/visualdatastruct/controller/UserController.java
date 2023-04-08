@@ -1,18 +1,13 @@
 package com.kerimsenturk.visualdatastruct.controller;
 
-import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserDto;
-import com.kerimsenturk.visualdatastruct.model.Result;
-import com.kerimsenturk.visualdatastruct.model.User;
+import com.kerimsenturk.visualdatastruct.dto.request.LoginUserRequest;
+import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserRequest;
 import com.kerimsenturk.visualdatastruct.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.net.http.HttpResponse;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/api/users/")
+@RequestMapping("/v1/api/users")
 public class UserController {
     private final UserService userService;
 
@@ -20,8 +15,17 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{uid}")
+    public ResponseEntity<?> getByUID(@PathVariable(name = "uid") int uid){
+        return userService.getByUID(uid);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<?> loginCheck(LoginUserRequest loginUserRequest){
+        return userService.loginCheck(loginUserRequest);
+    }
     @PostMapping("/")
-    public ResponseEntity<?> register(RegisterUserDto registerUserDto) {
-        return userService.save(registerUserDto);
+    public ResponseEntity<?> register(RegisterUserRequest registerUserRequest) {
+        return userService.register(registerUserRequest);
     }
 }
