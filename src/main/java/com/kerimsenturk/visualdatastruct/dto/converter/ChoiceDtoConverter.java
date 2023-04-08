@@ -1,6 +1,7 @@
 package com.kerimsenturk.visualdatastruct.dto.converter;
 
 import com.kerimsenturk.visualdatastruct.dto.ChoiceDto;
+import com.kerimsenturk.visualdatastruct.dto.request.CreateChoiceRequest;
 import com.kerimsenturk.visualdatastruct.model.Choice;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,12 @@ public class ChoiceDtoConverter implements DtoConverter<Choice, ChoiceDto>{
                 from.getDescription(),
                 from.isAnswer(),
                 questionDtoConverter.convert(from.getQuestion()));
+    }
+
+    public Choice convert(CreateChoiceRequest from){
+        if(from==null)
+            return new Choice();
+
+        return new Choice(0, from.getDescription(), from.isAnswer(), null);
     }
 }

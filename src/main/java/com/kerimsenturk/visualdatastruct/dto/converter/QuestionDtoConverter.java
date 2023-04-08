@@ -1,6 +1,7 @@
 package com.kerimsenturk.visualdatastruct.dto.converter;
 
 import com.kerimsenturk.visualdatastruct.dto.QuestionDto;
+import com.kerimsenturk.visualdatastruct.dto.request.CreateQuestionRequest;
 import com.kerimsenturk.visualdatastruct.model.Question;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -29,5 +30,17 @@ public class QuestionDtoConverter implements DtoConverter<Question, QuestionDto>
                 from.getImage(),
                 from.getChoices().stream().map(choiceDtoConverter::convert).collect(Collectors.toList()),
                 courseDtoConverter.convert(from.getCourse()));
+    }
+
+    public Question convert(CreateQuestionRequest from) {
+        if(from==null)
+            return new Question();
+
+        return new Question(
+                0,
+                from.getDescription(),
+                from.getImage(),
+                from.getChoices().stream().map(choiceDtoConverter::convert).collect(Collectors.toList()),
+                null);
     }
 }
