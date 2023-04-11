@@ -1,5 +1,7 @@
 package com.kerimsenturk.visualdatastruct.service;
 
+import com.kerimsenturk.visualdatastruct.dto.CourseDto;
+import com.kerimsenturk.visualdatastruct.dto.converter.CourseDtoConverter;
 import com.kerimsenturk.visualdatastruct.dto.converter.QuestionDtoConverter;
 import com.kerimsenturk.visualdatastruct.dto.request.CreateCourseRequest;
 import com.kerimsenturk.visualdatastruct.dto.request.CreateCourseWithoutQuestionsRequest;
@@ -19,15 +21,45 @@ import java.util.stream.Collectors;
 public class CourseService {
     private final CourseRepository courseRepository;
     private final QuestionDtoConverter questionDtoConverter;
-    public CourseService(CourseRepository courseRepository, QuestionDtoConverter questionDtoConverter) {
+    private final CourseDtoConverter courseDtoConverter;
+    public CourseService(CourseRepository courseRepository, QuestionDtoConverter questionDtoConverter, CourseDtoConverter courseDtoConverter) {
         this.courseRepository = courseRepository;
         this.questionDtoConverter = questionDtoConverter;
+        this.courseDtoConverter = courseDtoConverter;
     }
 
-    public ResponseEntity<Course> getById(int id){
-        return ResponseEntity.of(courseRepository.findById(id));
+    public ResponseEntity<CourseDto> getById(int id){
+        Optional<Course> course=courseRepository.findById(id);
+
+        if(course.isPresent()){
+            CourseDto courseDto=courseDtoConverter.convert(course.get());
+            return ResponseEntity.ok(courseDto);
+        }
+
+        return ResponseEntity.of(Optional.empty());
     }
 
+    public ResponseEntity<DataResult<List<CourseDto>>> getAllByOrderById(){
+        List<CourseDto> courses=courseRepository
+                .getAllByOrderById()
+                .stream().map(courseDtoConverter::convert).toList();
+
+        return ResponseEntity.of(
+                Optional.of(new SuccessDataResult<>(
+                                courses,
+                                null)));
+    }
+
+    public ResponseEntity<CourseDto> getByName(String name){
+        Optional<Course> course=courseRepository.getTopByName(name);
+
+        if(course.isPresent()){
+            CourseDto courseDto=courseDtoConverter.convert(course.get());
+            return ResponseEntity.ok(courseDto);
+        }
+
+        return ResponseEntity.of(Optional.empty());
+    }
     public ResponseEntity<DataResult<Course>> save(CreateCourseWithoutQuestionsRequest createCourseWithoutQuestionsRequest){
         Course course=new Course(
                 0,
@@ -36,7 +68,7 @@ public class CourseService {
                 null,
                 null);
 
-        return ResponseEntity.of(Optional.of(new SuccessDataResult<>(courseRepository.save(course), "Kurs kaydeildi")));
+        return ResponseEntity.of(Optional.of(new SuccessDataResult<>(courseRepository.save(course), "Kurs kaydedildi")));
     }
     public ResponseEntity<DataResult<Course>> save(CreateCourseRequest createCourseRequest){
         List<Question> questions=createCourseRequest.

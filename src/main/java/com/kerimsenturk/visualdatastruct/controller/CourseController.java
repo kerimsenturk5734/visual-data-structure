@@ -15,11 +15,20 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") int id){
         return courseService.getById(id);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<?> getAllByOrderById(){
+        return courseService.getAllByOrderById();
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<?> getByName(@PathVariable(name = "name") String name){
+        return courseService.getByName(name);
+    }
     @PostMapping("/add")
     public ResponseEntity<?> add(CreateCourseWithoutQuestionsRequest createCourseWithoutQuestionsRequest){
 
