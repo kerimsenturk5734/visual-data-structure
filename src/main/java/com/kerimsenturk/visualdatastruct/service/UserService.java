@@ -7,6 +7,7 @@ import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserRequest;
 import com.kerimsenturk.visualdatastruct.model.User;
 import com.kerimsenturk.visualdatastruct.repository.UserRepository;
 import com.kerimsenturk.visualdatastruct.utilities.results.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,16 @@ public class UserService {
         this.userRepository = userRepository;
         this.userDtoConverter = userDtoConverter;
     }
-    public ResponseEntity<Result> getByUID(int uid){
+    public ResponseEntity<UserDto> getByUID(int uid){
         Optional<User> userOptional=userRepository.findById(uid);
         if(userOptional.isPresent()){
             UserDto userDto=userDtoConverter.convert(userOptional.get());
-            return ResponseEntity.of(Optional.of(new SuccessDataResult<>(userDto, "")));
+            return ResponseEntity.of(Optional.of(userDto));
         }
 
         return ResponseEntity.notFound().build();
     }
-    public ResponseEntity<Result> register(RegisterUserRequest registerUserRequest){
+    public ResponseEntity<UserDto> register(RegisterUserRequest registerUserRequest){
         if(!isUserAlreadyRegistered(registerUserRequest)){
             User user=new User(
                     0,
@@ -39,10 +40,11 @@ public class UserService {
                     registerUserRequest.getMail(),
                     registerUserRequest.getPassword());
 
-            return ResponseEntity.ok(new SuccessDataResult<>(userRepository.save(user),"Kullanıcı kaydı başarılı"));
+            UserDto userDto=userDtoConverter.convert(userRepository.save(user));
+            return ResponseEntity.of(Optional.of(userDto));
         }
 
-        return ResponseEntity.ok(new ErrorDataResult<>("Bu mail ile zaten kayıtlı bir kullanıcı var."));
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     private boolean isUserAlreadyRegistered(RegisterUserRequest registerUserRequest){
