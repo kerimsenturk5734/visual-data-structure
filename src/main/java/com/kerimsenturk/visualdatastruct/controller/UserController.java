@@ -17,15 +17,15 @@ public class UserController {
 
     @GetMapping("/{uid}")
     public ResponseEntity<?> getByUID(@PathVariable(name = "uid") int uid){
-        return userService.getByUID(uid);
+        return ResponseEntity.of(userService.getByUID(uid));
     }
 
     @GetMapping("/login")
     public ResponseEntity<?> loginCheck(LoginUserRequest loginUserRequest){
-        return userService.loginCheck(loginUserRequest);
+        return ResponseEntity.of(userService.loginCheck(loginUserRequest));
     }
     @PostMapping("/")
     public ResponseEntity<?> register(RegisterUserRequest registerUserRequest) {
-        return userService.register(registerUserRequest);
+        return ResponseEntity.of(userService.register(registerUserRequest));
     }
 }
