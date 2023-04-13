@@ -32,6 +32,18 @@ public class QuestionDtoConverter implements DtoConverter<Question, QuestionDto>
                 courseDtoConverter.convert(from.getCourse()));
     }
 
+    public Question convert(QuestionDto from){
+        if(from==null)
+            return new Question();
+
+        return new Question(
+                from.getId(),
+                from.getDescription(),
+                from.getImage(),
+                from.getChoices().stream().map(choiceDtoConverter::convert).collect(Collectors.toList()),
+                courseDtoConverter.convert(from.getCourse()));
+    }
+
     public Question convert(CreateQuestionRequest from) {
         if(from==null)
             return new Question();

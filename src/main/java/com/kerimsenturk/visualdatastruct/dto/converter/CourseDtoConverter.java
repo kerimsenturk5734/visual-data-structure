@@ -1,9 +1,12 @@
 package com.kerimsenturk.visualdatastruct.dto.converter;
 
 import com.kerimsenturk.visualdatastruct.dto.CourseDto;
+import com.kerimsenturk.visualdatastruct.dto.QuestionDto;
 import com.kerimsenturk.visualdatastruct.model.Course;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 import java.util.stream.Collectors;
 
@@ -21,7 +24,23 @@ public class CourseDtoConverter implements DtoConverter<Course, CourseDto> {
         if(from==null)
             return new CourseDto();
 
+        List<QuestionDto> questionDtos=null;
+        if(from.getQuestions()!=null)
+            questionDtos=from.getQuestions().stream().map(questionDtoConverter::convert).collect(Collectors.toList());
+
         return new CourseDto(
+                from.getId(),
+                from.getName(),
+                from.getPath(),
+                questionDtos,
+               null);
+    }
+
+    public Course convert(CourseDto from){
+        if(from==null)
+            return new Course();
+
+        return new Course(
                 from.getId(),
                 from.getName(),
                 from.getPath(),

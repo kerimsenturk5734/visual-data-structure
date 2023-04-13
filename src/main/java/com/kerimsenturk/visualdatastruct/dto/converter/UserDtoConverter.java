@@ -18,4 +18,16 @@ public class UserDtoConverter implements DtoConverter<User, UserDto>{
                 from.getMail(),
                 from.getPassword());
     }
+
+    public User convert(UserDto from){
+        if(from==null)
+            return new User();
+
+        return new User(
+                from.getUid(),
+                from.getName(),
+                from.getSurname(),
+                from.getMail(),
+                from.getPassword());
+    }
 }

@@ -2,7 +2,6 @@ package com.kerimsenturk.visualdatastruct.dto.converter;
 
 import com.kerimsenturk.visualdatastruct.dto.ResultDto;
 import com.kerimsenturk.visualdatastruct.model.Result;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,6 +20,16 @@ public class ResultDtoConverter implements DtoConverter<Result, ResultDto> {
             return new ResultDto();
 
         return new ResultDto(from.getId(),
+                from.getResult(),
+                userDtoConverter.convert(from.getUser()),
+                courseDtoConverter.convert(from.getCourse()));
+    }
+
+    public Result convert(ResultDto from) {
+        if(from==null)
+            return new Result();
+
+        return new Result(from.getId(),
                 from.getResult(),
                 userDtoConverter.convert(from.getUser()),
                 courseDtoConverter.convert(from.getCourse()));

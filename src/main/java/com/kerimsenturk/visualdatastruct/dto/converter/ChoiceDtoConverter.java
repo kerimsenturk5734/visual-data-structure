@@ -26,6 +26,17 @@ public class ChoiceDtoConverter implements DtoConverter<Choice, ChoiceDto>{
                 questionDtoConverter.convert(from.getQuestion()));
     }
 
+    public Choice convert(ChoiceDto from) {
+        if(from==null)
+            return new Choice();
+
+        return new Choice(
+                from.getId(),
+                from.getDescription(),
+                from.isAnswer(),
+                questionDtoConverter.convert(from.getQuestion()));
+    }
+
     public Choice convert(CreateChoiceRequest from){
         if(from==null)
             return new Choice();
