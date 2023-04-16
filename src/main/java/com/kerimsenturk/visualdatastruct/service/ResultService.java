@@ -22,8 +22,14 @@ public class ResultService {
         this.courseService = courseService;
     }
 
-    public Result getByResultId(int id){
+    public Result getById(int id){
         Optional<Result> result=resultRepository.findById(id);
+        return result.orElseThrow();
+    }
+
+    public Result getByUserIdAndCourseId(int uid,int courseId){
+        Optional<Result> result=resultRepository.findByUser_UidAndCourse_Id(uid,courseId);
+
         return result.orElseThrow();
     }
 

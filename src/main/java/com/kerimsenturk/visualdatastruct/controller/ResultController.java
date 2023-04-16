@@ -19,15 +19,19 @@ public class ResultController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Result> getByResultId(@PathVariable(name = "id") int id){
-        return ResponseEntity.of(Optional.of(resultService.getByResultId(id)));
+    public ResponseEntity<Result> getById(@PathVariable(name = "id") int id){
+        return ResponseEntity.of(Optional.of(resultService.getById(id)));
     }
 
     @GetMapping("/user_uid_{uid}")
     public ResponseEntity<List<Result>> getByUserId(@PathVariable(name = "uid") int uid){
         return ResponseEntity.of(Optional.of(resultService.getByUserId(uid)));
     }
-
+    @GetMapping("user_uid_{uid}/course_id_{courseId}")
+    public ResponseEntity<Result>
+    getByUserIdAndCourseId(@PathVariable(name = "uid") int uid, @PathVariable(name="courseId") int courseId){
+        return ResponseEntity.of(Optional.of(resultService.getByUserIdAndCourseId(uid,courseId)));
+    }
     @PostMapping("/")
     public ResponseEntity<?> add(CreateResultRequest createResultRequest){
         return ResponseEntity.status(resultService.add(createResultRequest)).build();
