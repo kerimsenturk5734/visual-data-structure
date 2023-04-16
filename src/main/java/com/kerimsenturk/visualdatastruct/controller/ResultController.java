@@ -6,6 +6,8 @@ import com.kerimsenturk.visualdatastruct.service.ResultService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/api/result")
 public class ResultController {
@@ -21,7 +23,7 @@ public class ResultController {
     }
 
     @GetMapping("/user_uid_{uid}")
-    public ResponseEntity<ResultDto> getByUserId(@PathVariable(name = "uid") int uid){
+    public ResponseEntity<List<ResultDto>> getByUserId(@PathVariable(name = "uid") int uid){
         return resultService.getByUserId(uid);
     }
 

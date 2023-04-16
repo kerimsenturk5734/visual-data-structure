@@ -14,7 +14,9 @@ import com.kerimsenturk.visualdatastruct.repository.ResultRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ResultService {
@@ -45,12 +47,16 @@ public class ResultService {
         return ResponseEntity.of(Optional.empty());
     }
 
-    public ResponseEntity<ResultDto> getByUserId(int uid){
-        Optional<Result> result=resultRepository.findByUser_Uid(uid);
+    public ResponseEntity<List<ResultDto>> getByUserId(int uid){
+        Optional<List<Result>> resultList=resultRepository.findByUser_Uid(uid);
 
-        if(result.isPresent()){
-            ResultDto resultDto=resultDtoConverter.convert(result.get());
-            return ResponseEntity.ok(resultDto);
+        if(resultList.isPresent()){
+            List<ResultDto> resultDtoList=resultList.get()
+                    .stream()
+                    .map(resultDtoConverter::convert)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(resultDtoList);
         }
 
         return ResponseEntity.of(Optional.empty());
