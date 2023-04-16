@@ -45,6 +45,6 @@ public class CourseDtoConverter implements DtoConverter<Course, CourseDto> {
                 from.getName(),
                 from.getPath(),
                 from.getQuestions().stream().map(questionDtoConverter::convert).collect(Collectors.toList()),
-                resultDtoConverter.convert(from.getResult()));
+                from.getResult().stream().map(resultDtoConverter::convert).collect(Collectors.toList()));
     }
 }

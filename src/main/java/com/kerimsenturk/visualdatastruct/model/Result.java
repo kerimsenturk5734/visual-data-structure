@@ -24,7 +24,7 @@ public class Result {
     @JoinColumn(name ="user_id")
     private User user;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name ="course_id",referencedColumnName = "id")
     private Course course;
 }
