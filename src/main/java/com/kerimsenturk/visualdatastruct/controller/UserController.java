@@ -6,6 +6,8 @@ import com.kerimsenturk.visualdatastruct.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/v1/api/users")
 public class UserController {
@@ -17,7 +19,7 @@ public class UserController {
 
     @GetMapping("/{uid}")
     public ResponseEntity<?> getByUID(@PathVariable(name = "uid") int uid){
-        return ResponseEntity.of(userService.getByUID(uid));
+        return ResponseEntity.of(Optional.of(userService.getByUID(uid)));
     }
 
     @GetMapping("/login")
@@ -26,6 +28,6 @@ public class UserController {
     }
     @PostMapping("/")
     public ResponseEntity<?> register(RegisterUserRequest registerUserRequest) {
-        return ResponseEntity.of(userService.register(registerUserRequest));
+        return ResponseEntity.status(userService.register(registerUserRequest)).build();
     }
 }

@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
-    List<Course> getAllByOrderById();
+    Optional<List<Course>> getAllByOrderById();
     Optional<Course> getTopByName(String name);
 }
