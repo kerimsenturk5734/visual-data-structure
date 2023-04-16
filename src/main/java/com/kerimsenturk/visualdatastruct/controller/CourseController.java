@@ -15,7 +15,7 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") int id){
         return ResponseEntity.of(courseService.getById(id));
     }
@@ -25,17 +25,17 @@ public class CourseController {
         return ResponseEntity.of(courseService.getAllByOrderById());
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/name_{name}")
     public ResponseEntity<?> getByName(@PathVariable(name = "name") String name){
         return ResponseEntity.of(courseService.getByName(name));
     }
-    @PostMapping("/add")
-    public ResponseEntity<?> add(CreateCourseWithoutQuestionsRequest createCourseWithoutQuestionsRequest){
+    @PostMapping("/addwithout")
+    public ResponseEntity<?> addWithout(CreateCourseWithoutQuestionsRequest createCourseWithoutQuestionsRequest){
 
         return ResponseEntity.of(courseService.save(createCourseWithoutQuestionsRequest));
     }
 
-    @PostMapping("/addwithout")
+    @PostMapping("/add")
     public ResponseEntity<?> add(CreateCourseRequest createCourseRequest){
         return ResponseEntity.of(courseService.save(createCourseRequest));
     }
