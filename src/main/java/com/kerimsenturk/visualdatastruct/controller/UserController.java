@@ -24,7 +24,7 @@ public class UserController {
     public ResponseEntity<?> loginCheck(LoginUserRequest loginUserRequest){
         return ResponseEntity.of(userService.loginCheck(loginUserRequest));
     }
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<?> register(RegisterUserRequest registerUserRequest) {
         return ResponseEntity.of(userService.register(registerUserRequest));
     }
