@@ -63,4 +63,11 @@ public class UserService {
 
         return Optional.empty();
     }
+
+    public User getByMail(String mail){
+        User user=userRepository.getTopByMail(mail);
+
+        return user;
+
+    }
 }
