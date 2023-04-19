@@ -1,6 +1,7 @@
 package com.kerimsenturk.visualdatastruct.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Question> questions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "course")
     private List<Result> result;
 }

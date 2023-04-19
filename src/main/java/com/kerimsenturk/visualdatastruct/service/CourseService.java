@@ -1,13 +1,12 @@
 package com.kerimsenturk.visualdatastruct.service;
 
-import com.kerimsenturk.visualdatastruct.dto.CourseDto;
-import com.kerimsenturk.visualdatastruct.dto.converter.CourseDtoConverter;
 import com.kerimsenturk.visualdatastruct.dto.converter.QuestionDtoConverter;
 import com.kerimsenturk.visualdatastruct.dto.request.CreateCourseRequest;
 import com.kerimsenturk.visualdatastruct.dto.request.CreateCourseWithoutQuestionsRequest;
 import com.kerimsenturk.visualdatastruct.model.Course;
 import com.kerimsenturk.visualdatastruct.model.Question;
 import com.kerimsenturk.visualdatastruct.repository.CourseRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,41 +17,36 @@ import java.util.stream.Collectors;
 public class CourseService {
     private final CourseRepository courseRepository;
     private final QuestionDtoConverter questionDtoConverter;
-    private final CourseDtoConverter courseDtoConverter;
-    public CourseService(CourseRepository courseRepository, QuestionDtoConverter questionDtoConverter, CourseDtoConverter courseDtoConverter) {
+    public CourseService(CourseRepository courseRepository, QuestionDtoConverter questionDtoConverter) {
         this.courseRepository = courseRepository;
         this.questionDtoConverter = questionDtoConverter;
-        this.courseDtoConverter = courseDtoConverter;
     }
 
-    public Optional<CourseDto> getById(int id){
+    public Course getById(int id){
         Optional<Course> course=courseRepository.findById(id);
-        return course.map(courseDtoConverter::convert);
+        return course.orElseThrow();
     }
 
-    public Optional<List<CourseDto>> getAllByOrderById(){
-        List<CourseDto> courses=courseRepository
-                .getAllByOrderById()
-                .stream().map(courseDtoConverter::convert).toList();
-
-        return Optional.of(courses);
+    public List<Course> getAllByOrderById(){
+        Optional<List<Course>> courses=courseRepository.getAllByOrderById();
+        return courses.orElseThrow();
     }
 
-    public Optional<CourseDto> getByName(String name){
+    public Course getByName(String name){
         Optional<Course> course=courseRepository.getTopByName(name);
-        return course.map(courseDtoConverter::convert);
+        return course.orElseThrow();
     }
-    public Optional<CourseDto> save(CreateCourseWithoutQuestionsRequest createCourseWithoutQuestionsRequest){
+    public HttpStatus save(CreateCourseWithoutQuestionsRequest createCourseWithoutQuestionsRequest){
         Course course=new Course(
                 0,
                 createCourseWithoutQuestionsRequest.getName(),
                 createCourseWithoutQuestionsRequest.getPath(),
                 null,
                 null);
-
-        return Optional.of(courseDtoConverter.convert(courseRepository.save(course)));
+        courseRepository.save(course);
+        return HttpStatus.CREATED;
     }
-    public Optional<CourseDto> save(CreateCourseRequest createCourseRequest){
+    public HttpStatus save(CreateCourseRequest createCourseRequest){
         List<Question> questions=createCourseRequest.
                 getQuestions().stream().map(questionDtoConverter::convert).collect(Collectors.toList());
 
@@ -63,7 +57,8 @@ public class CourseService {
                 questions,
                 null);
 
-        return Optional.of(courseDtoConverter.convert(courseRepository.save(course)));
+        courseRepository.save(course);
+        return HttpStatus.CREATED;
     }
 
 }

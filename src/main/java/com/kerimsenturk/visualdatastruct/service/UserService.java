@@ -1,13 +1,11 @@
 package com.kerimsenturk.visualdatastruct.service;
 
-import com.kerimsenturk.visualdatastruct.dto.UserDto;
-import com.kerimsenturk.visualdatastruct.dto.converter.UserDtoConverter;
-import com.kerimsenturk.visualdatastruct.dto.request.LoginUserRequest;
 import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserRequest;
 import com.kerimsenturk.visualdatastruct.model.User;
 import com.kerimsenturk.visualdatastruct.repository.UserRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,23 +14,18 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final UserDtoConverter userDtoConverter;
     private final PasswordEncoder passwordEncoder;
-    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter,@Lazy PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository,@Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.userDtoConverter = userDtoConverter;
         this.passwordEncoder = passwordEncoder;
     }
-    public Optional<UserDto> getByUID(int uid){
-        Optional<User> userOptional=userRepository.findById(uid);
-        if(userOptional.isPresent()){
-            UserDto userDto=userDtoConverter.convert(userOptional.get());
-            return Optional.of(userDto);
-        }
 
-        return Optional.empty();
+    public User getByUID(int uid){
+        Optional<User> userOptional=userRepository.findById(uid);
+        return userOptional.orElseThrow();
+
     }
-    public Optional<UserDto> register(RegisterUserRequest registerUserRequest){
+    public HttpStatus register(RegisterUserRequest registerUserRequest){
         if(!isUserAlreadyRegistered(registerUserRequest)){
 
             //Password encoding by bcrypt encoder
@@ -47,11 +40,11 @@ public class UserService {
                     registerUserRequest.getMail(),
                     registerUserRequest.getPassword());
 
-            UserDto userDto=userDtoConverter.convert(userRepository.save(user));
-            return Optional.of(userDto);
+            userRepository.save(user);
+            return HttpStatus.CREATED;
         }
 
-        return Optional.empty();
+        return HttpStatus.CONFLICT;
     }
 
     private boolean isUserAlreadyRegistered(RegisterUserRequest registerUserRequest){
