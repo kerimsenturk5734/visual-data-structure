@@ -6,7 +6,8 @@ import com.kerimsenturk.visualdatastruct.dto.request.LoginUserRequest;
 import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserRequest;
 import com.kerimsenturk.visualdatastruct.model.User;
 import com.kerimsenturk.visualdatastruct.repository.UserRepository;
-import com.kerimsenturk.visualdatastruct.utilities.results.*;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final UserDtoConverter userDtoConverter;
-    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter) {
+    private final PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter,@Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userDtoConverter = userDtoConverter;
+        this.passwordEncoder = passwordEncoder;
     }
     public Optional<UserDto> getByUID(int uid){
         Optional<User> userOptional=userRepository.findById(uid);
@@ -31,6 +34,12 @@ public class UserService {
     }
     public Optional<UserDto> register(RegisterUserRequest registerUserRequest){
         if(!isUserAlreadyRegistered(registerUserRequest)){
+
+            //Password encoding by bcrypt encoder
+            registerUserRequest.setPassword(
+                    passwordEncoder.encode(registerUserRequest.getPassword())
+            );
+            System.out.println(registerUserRequest.getPassword());
             User user=new User(
                     0,
                     registerUserRequest.getName(),
@@ -49,25 +58,10 @@ public class UserService {
       return !(userRepository.getTopByMail(registerUserRequest.getMail())==null);
     }
 
-    public Optional<com.kerimsenturk.visualdatastruct.utilities.results.Result> loginCheck(LoginUserRequest loginUserRequest){
-        User user=userRepository.getTopByMail(loginUserRequest.getMail());
-        if(user!=null){
-            if(user.getPassword().equals(loginUserRequest.getPassword())){
-                //Mail şifre doğru
-                return Optional.of(new SuccessResult("Giriş başarılı"));
-            }
-            else{
-                return Optional.of(new ErrorResult("Giriş başarısız"));
-            }
-        }
-
-        return Optional.empty();
-    }
 
     public User getByMail(String mail){
-        User user=userRepository.getTopByMail(mail);
 
-        return user;
+        return userRepository.getTopByMail(mail);
 
     }
 }
