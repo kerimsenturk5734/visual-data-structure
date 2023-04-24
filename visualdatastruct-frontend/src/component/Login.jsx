@@ -1,5 +1,7 @@
 import React from 'react';
+import UserService from '../service/UserService'
 const { Component } = React;
+
 
 
 
@@ -18,6 +20,8 @@ export default class EntryPage extends Component {
       name:"",
       surname:""
     }
+
+   
   }
   
 
@@ -124,7 +128,7 @@ export default class EntryPage extends Component {
             
             </fieldset> 
             <>
-              <button id="registerBtn" onClick={(e)=>this.registerLaborant(e)} >Register</button>
+              <button id="registerBtn" onClick={()=>this.register()} >Register</button>
               <button type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
             </>
           </form>
@@ -159,7 +163,7 @@ export default class EntryPage extends Component {
                     </li>
                 </ul>
                 </fieldset>
-                <button id="loginBtn">Login</button>
+                <button id="loginBtn" onClick={(e) => this.login(e)}>Login</button>
                 <button type="button" onClick={ () => this.changeView("signUp")}>Create An Account</button>
             </form>
             )
@@ -189,6 +193,20 @@ export default class EntryPage extends Component {
 
     
   }
+  login = (e)=>{
+    e.preventDefault();
+    if(this.validate()){
+      let loginUser=this.state.login;
+      UserService.login(loginUser.mail,loginUser.password)
+    }
+  }
+
+  register = ()=>{
+    if(this.validate()){
+      let registerUser=this.state.register;
+      UserService.register(registerUser.name,registerUser.surname,registerUser.mail,registerUser.password);
+    }
+  }
 
   validate = () => {
     var valid=true;
@@ -199,16 +217,7 @@ export default class EntryPage extends Component {
     })
     return valid;
   }
-
-
   
-  registerLaborant=(e)=>{
-    /*e.preventDefault();
-    console.log(this.validate())
-    if(this.validate())
-      addLaborant(this.state.laborantRegister);
-*/
-  }
   render() {
     return (
       <section id="entry-page">

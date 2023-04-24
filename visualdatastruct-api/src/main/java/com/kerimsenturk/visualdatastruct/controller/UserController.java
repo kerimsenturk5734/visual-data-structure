@@ -45,7 +45,7 @@ public class UserController {
         }
     }
     @PostMapping("/register")
-    public ResponseEntity<?> register(RegisterUserRequest registerUserRequest) {
+    public ResponseEntity<?> register(@RequestBody RegisterUserRequest registerUserRequest) {
         return ResponseEntity.status(userService.register(registerUserRequest)).build();
     }
 }
