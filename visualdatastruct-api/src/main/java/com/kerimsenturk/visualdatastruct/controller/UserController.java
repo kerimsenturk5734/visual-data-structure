@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/api/users")
+@CrossOrigin
 public class UserController {
     private final UserService userService;
     private final AuthenticationManager authManager;
@@ -30,8 +31,8 @@ public class UserController {
         return ResponseEntity.of(Optional.of(userService.getByUID(uid)));
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<?> login(LoginUserRequest loginUserRequest){
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginUserRequest loginUserRequest){
         try {
             authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginUserRequest.getMail(),loginUserRequest.getPassword()));

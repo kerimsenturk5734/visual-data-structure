@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/api/result")
+@CrossOrigin
 public class ResultController {
     private final ResultService resultService;
 
