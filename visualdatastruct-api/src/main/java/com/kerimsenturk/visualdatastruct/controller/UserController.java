@@ -5,6 +5,9 @@ import com.kerimsenturk.visualdatastruct.dto.request.LoginUserRequest;
 import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserRequest;
 import com.kerimsenturk.visualdatastruct.service.UserService;
 import com.kerimsenturk.visualdatastruct.utilities.results.ErrorResult;
+import com.kerimsenturk.visualdatastruct.utilities.results.SuccessDataResult;
+import com.kerimsenturk.visualdatastruct.utilities.results.SuccessResult;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,7 +40,11 @@ public class UserController {
             authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginUserRequest.getMail(),loginUserRequest.getPassword()));
 
-            return ResponseEntity.ok(tokenManager.generate(loginUserRequest.getMail()));
+            return ResponseEntity
+                    .status(HttpStatus.ACCEPTED)
+                    .body(new SuccessDataResult<>(
+                            tokenManager.generate(loginUserRequest.getMail()),
+                            "Giriş Başarılı"));
         }
         catch (Exception e){
             System.out.println(e.getMessage()+" for " +loginUserRequest.getMail());
@@ -46,6 +53,14 @@ public class UserController {
     }
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterUserRequest registerUserRequest) {
-        return ResponseEntity.status(userService.register(registerUserRequest)).build();
+        HttpStatus httpStatus=userService.register((registerUserRequest));
+        if(httpStatus.is2xxSuccessful()){
+            return ResponseEntity.ok(new SuccessResult("Kayıt Başarılı."));
+        }
+        else if(httpStatus.equals(HttpStatus.CONFLICT)){
+            return ResponseEntity.status(httpStatus).body(new ErrorResult("Bu mail ile kayıtlı bir kullanıcı var."));
+        }
+
+        return ResponseEntity.status(httpStatus).build();
     }
 }
