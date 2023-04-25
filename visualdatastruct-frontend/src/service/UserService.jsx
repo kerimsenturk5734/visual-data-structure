@@ -1,46 +1,61 @@
+
 import {
     LoginUserRequest,
     RegisterUserRequest
 } from '../model/User'
+
 let SERVICE_API_URL = "http://localhost:8080/v1/api/users";
 
 //ENDPOINTS
 let LOGIN_ENDPOINT = `${SERVICE_API_URL}/login`;
 let REGISTER_ENDPOINT = `${SERVICE_API_URL}/register`;
 
+const state = {
+    response:"",
+
+}
+
 const UserService = {
-    login: function (mail, password) {
+  
+    getResponse:function(){
+        return state.response;
+    },
+    setResponse:function(val){
+        state.response = val;
+    },
+    login: async function (mail, password) {
         let loginUser = new LoginUserRequest(mail, password);
-        console.log(loginUser);
-        postFetch(loginUser, LOGIN_ENDPOINT);
+        //console.log(loginUser);
+        
+         await postFetch(loginUser, LOGIN_ENDPOINT);
+         console.log(state.response);
     },
 
-    register: function (name, surname, mail, password) {
+    register: async function (name, surname, mail, password) {
         let registerUser = new RegisterUserRequest(name, surname, mail, password);
         console.log(registerUser);
-        postFetch(registerUser, REGISTER_ENDPOINT);
+        await postFetch(registerUser, REGISTER_ENDPOINT);
+        console.log(state.response);
+        
     }
 
+    
 };
 
 
-const postFetch = (DATA, ENDPOINT) => {
-    fetch(ENDPOINT, {
-            method: 'POST',
-            body: JSON.stringify(DATA),
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': '*/*',
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            // Handle data
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
+const postFetch =  function(DATA, ENDPOINT){
+    return fetch(ENDPOINT, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body:JSON.stringify(DATA),
+       })
+       .then((response) => response.json())
+       .then((responseJson) => {
+            UserService.setResponse(responseJson);
+       })
+       .catch((error) => {
+         console.error(error);
+       });
 
 }
 
