@@ -9,6 +9,7 @@ let SERVICE_API_URL = "http://localhost:8080/v1/api/users";
 //ENDPOINTS
 let LOGIN_ENDPOINT = `${SERVICE_API_URL}/login`;
 let REGISTER_ENDPOINT = `${SERVICE_API_URL}/register`;
+let VALIDATE_ENDPOINT = `${SERVICE_API_URL}/validate`;
 
 const state = {
     response:"",
@@ -16,7 +17,6 @@ const state = {
 }
 
 const UserService = {
-  
     getResponse:function(){
         return state.response;
     },
@@ -28,7 +28,34 @@ const UserService = {
         //console.log(loginUser);
         
          await postFetch(loginUser, LOGIN_ENDPOINT);
-         console.log(state.response);
+         let res=state.response;
+         console.log(res);
+
+         if(res.success === true){
+            localStorage.setItem("user",res.data.key);
+         }
+    },
+
+    logout:function(){
+        localStorage.removeItem("user");
+        
+    },
+    
+    isTokenValid:async function(token){
+         return fetch(VALIDATE_ENDPOINT, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body:token,
+           })
+           .then((response) => response.json())
+           .then((responseJson) => {
+                UserService.setResponse(responseJson);
+               // console.log(responseJson);
+           })
+           .catch((error) => {
+             console.error(error);
+           });
+    
     },
 
     register: async function (name, surname, mail, password) {
@@ -52,6 +79,7 @@ const postFetch =  function(DATA, ENDPOINT){
        .then((response) => response.json())
        .then((responseJson) => {
             UserService.setResponse(responseJson);
+            console.log(responseJson);
        })
        .catch((error) => {
          console.error(error);
