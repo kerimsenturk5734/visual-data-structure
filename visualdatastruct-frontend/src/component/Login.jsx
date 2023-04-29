@@ -1,43 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UserService from '../service/UserService'
-const { Component } = React;
+import { useNavigate } from 'react-router-dom';
 
+export default function Login() {
+  const navigate=useNavigate();
+  const [view,setView] = useState("logIn");
+  const [passAlert,setPassAlert] = useState("");
+  const [loginModel,setLoginModel] = useState({mail:"",password:""});
+  const [registerModel,setRegisterModel] = useState({mail:"",password:"",name:"",surname:""});
+  const [response,setResponse] = useState({success:"",message:""});
+  /*{
+      currentView: "logIn",
+      passAlert: "",
+      login:{
+        mail:"",
+        password:""
+      },
+      response:{
+        success:"",
+        message:"",
+      },
+  
+      register:{
+        mail:"",
+        password:"",
+        name:"",
+        surname:""
+      },
+  
+     
+    } */
+  
+  const changeView = (view) => {
+    setView(view);
+    setPassAlert("");
+    setResponse("");
 
-
-
-export default class EntryPage extends Component {
-  state = {
-    currentView: "logIn",
-    passAlert: "",
-    login:{
-      mail:"",
-      password:""
-    },
-    response:{
-      success:"",
-      message:"",
-    },
-
-    register:{
-      mail:"",
-      password:"",
-      name:"",
-      surname:""
-    },
-
-   
-  }
-  changeView = (view) => {
-    this.setState({
-      currentView: view,
-      passAlert:"",
-      response:"",
-    })
     document.querySelectorAll('form').forEach((item) => {item.reset()})
     
   }
-  currentView = () => {
-    switch(this.state.currentView) {
+  const currentView = () => {
+    switch(view) {
       case "signUp":
         return (            
           <form>
@@ -49,14 +52,14 @@ export default class EntryPage extends Component {
                   <label htmlFor="mail">Mail:</label>
                   <input
                     id="mail"
-                    onInput={(e) => this.handle(e,this.state.register)}
+                    onInput={(e) => handle(e,registerModel)}
                     maxLength={50}                  
                     required/>
                 </li>
                 <li>
                   <label htmlFor="name">Name:</label>
                   <input 
-                    onChange={(e) => this.handle(e,this.state.register)} 
+                    onChange={(e) => handle(e,registerModel)} 
                     type="text" 
                     id="name"
                     maxLength={40}
@@ -65,7 +68,7 @@ export default class EntryPage extends Component {
                 <li>
                   <label htmlFor="surname">Surname:</label>
                   <input 
-                    onChange={(e) => this.handle(e,this.state.register)} 
+                    onChange={(e) => handle(e,registerModel)} 
                     type="text" 
                     id="surname" 
                     maxLength={40}
@@ -74,7 +77,7 @@ export default class EntryPage extends Component {
                 <li>
                   <label htmlFor="password">Password:</label>
                   <input
-                    onChange={(e) => {this.handlePassword(e); this.handle(e,this.state.register)}}
+                    onChange={(e) => {handlePassword(e); handle(e,registerModel)}}
                     type="password" 
                     id="password"
                     minLength={8}
@@ -84,14 +87,14 @@ export default class EntryPage extends Component {
                 <li>
                   <label htmlFor="repassword">Repassword:</label>
                   <input 
-                    onChange={(e) => this.handlePassword(e)}
+                    onChange={(e) => handlePassword(e)}
                     type="password"
                     id="repassword" 
                     maxLength={40}
                     required/>   
                 </li>
-                <label id="registerAlert" style={{backgroundColor:'green'}} >{this.getResponse().message}</label>
-                <label id="passAlert" className='text-danger' >{this.getPassAlert()}</label>
+                <label id="registerAlert" style={{color:getColor()}} >{getResponse().message}</label>
+                <label id="passAlert" className='text-danger' >{getPassAlert()}</label>
               </ul>
              
             
@@ -99,16 +102,16 @@ export default class EntryPage extends Component {
             <>
               <button 
                 id="registerBtn" 
-                onClick={(e)=>this.register(e)} >Register</button>
+                onClick={(e)=>register(e)} >Register</button>
 
-              <button type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
+              <button type="button" onClick={ () => changeView("logIn")}>Have an Account?</button>
             </>
           </form>
         )
         
         case "logIn":
             return (
-            <form>
+            <form onSubmit={()=>{return false}}>
                 <h2>Welcome To Data Structures Course!</h2>
                 <fieldset>
                 <legend>Log In</legend>
@@ -116,7 +119,7 @@ export default class EntryPage extends Component {
                     <li>
                     <label htmlFor="mail">Mail:</label>
                     <input 
-                      onInput={(e) => {this.handle(e,this.state.login)}} 
+                      onInput={(e) => {handle(e,loginModel)}} 
                       id="mail" 
                       type="email"
                       maxLength="50" 
@@ -127,20 +130,20 @@ export default class EntryPage extends Component {
                     <input 
                       type="password" 
                       id="password"  
-                      onInput={(e) => {this.handle(e,this.state.login)}}required/>
+                      onInput={(e) => {handle(e,loginModel)}}required/>
                     </li>
                     <li>
                     <i/>
-                    <a onClick={ () => this.changeView("PWReset")} href="#">Forgot Password?</a>
+                    <a onClick={ () => changeView("PWReset")} href="#">Forgot Password?</a>
                     </li>
                 </ul>
                 </fieldset>
-                <label style={{color:this.getColor()}}>{this.getResponse().message}</label>
+                <label style={{color:getColor()}}>{getResponse().message}</label>
                 <button 
                   id="loginBtn" 
-                  onClick={(e) => {this.login(e)}}>Login</button>
+                  onClick={(e) => {login(e)}}>Login</button>
 
-                <button type="button" onClick={() => this.changeView("signUp")}>Create An Account</button>
+                <button type="button" onClick={() => changeView("signUp")}>Create An Account</button>
             </form>
             )
         case "PWReset":
@@ -160,7 +163,7 @@ export default class EntryPage extends Component {
             </ul>
           </fieldset>
           <button>Send Reset Link</button>
-          <button type="button" onClick={ () => this.changeView("logIn")}>Go Back</button>
+          <button type="button" onClick={ () => changeView("logIn")}>Go Back</button>
         </form>
         )
       default:
@@ -169,55 +172,56 @@ export default class EntryPage extends Component {
 
     
   }
-  login = async (e)=>{
+  const login = async (e)=>{
+    
     //console.log(e);
-    //e.preventDefault();
-    if(this.validate()){
-      let loginUser=this.state.login;
-      await UserService.login(loginUser.mail,loginUser.password)
-      this.setState({response : UserService.getResponse()})
-    }
-  }
-  register = async (e)=>{
-   //e.preventDefault();
-    if(this.validate()){
-      let registerUser=this.state.register;
-      await UserService.register(registerUser.name,registerUser.surname,registerUser.mail,registerUser.password);
-      this.setState({response : UserService.getResponse()});
+    e.preventDefault();
+
+    if(validate()){
+      await UserService.login(loginModel.mail,loginModel.password)
+        .then((res)=>{
+          //console.log(res);
+          setResponse(UserService.getResponse());
+          if(UserService.getResponse().success === true){
+            setTimeout(()=>{navigate("/courseMain")},2000)
+          }
+        })
       
     }
   }
-  handle = (e,whichModel) => {
+  const register = async (e)=>{
+   e.preventDefault();
+    if(validate()){
+      await UserService.register(registerModel.name,registerModel.surname,registerModel.mail,registerModel.password);
+      setResponse(UserService.getResponse());
+      setTimeout(()=>{window.location.reload()},2000)
+    }
+  }
+  const handle = (e,whichModel) => {
     whichModel[e.target.id]=e.target.value;
   } 
-  handlePassword = (e) => {
-    let registerState=this.state.register;
-    let password=registerState.password;
+  const handlePassword = (e) => {
+    let password=registerModel.password;
     if(e.target.id === "password"){
       password=document.getElementById("repassword").value;
     }
     
     let isEqual= (e.target.value !== password);
     
-    if(isEqual){
-      this.setState({
-        passAlert: "***Şifreler eşleşmiyor"
-      });
-      
-    }    
-    else{
-      this.setState({
-        passAlert: ""
-      });
-    }
+    if(isEqual)
+      setPassAlert("***Şifreler eşleşmiyor");  
 
-    if(this.state.currentView === "signUp")
+    else
+      setPassAlert("");
+
+
+    if(view === "signUp")
       document.getElementById("registerBtn").disabled=isEqual;
   }
-  getPassAlert = ()=>{
-    return this.state.passAlert;
+  const getPassAlert = ()=>{
+    return passAlert;
   }
-  validate = () => {
+  const validate = () => {
     var valid=true;
     document.querySelectorAll("input").forEach((e)=>{
       if(!e.validity.valid){
@@ -226,21 +230,19 @@ export default class EntryPage extends Component {
     })
     return valid;
   }
-  getResponse = () => {
-    return this.state.response;
+  const getResponse = () => {
+    return response;
   }
-  getColor = () => {
-    let res=this.getResponse();
+  const getColor = () => {
+    let res=getResponse();
     
     return res.success ? 'green' : 'red';
   }
-  render() {
-    return (
-      <section id="entry-page">
-        {this.currentView()}
-        
-      </section>
-    )
-  }
+  
+  return (
+    <section id="entry-page">
+      {currentView()}
+      
+    </section>
+  );
 }
-
