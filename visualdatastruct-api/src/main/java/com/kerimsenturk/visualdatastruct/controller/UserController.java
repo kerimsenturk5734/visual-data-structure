@@ -58,9 +58,21 @@ public class UserController {
             return ResponseEntity.ok(new SuccessResult("Kayıt Başarılı."));
         }
         else if(httpStatus.equals(HttpStatus.CONFLICT)){
-            return ResponseEntity.status(httpStatus).body(new ErrorResult("Bu mail ile kayıtlı bir kullanıcı var."));
+            return ResponseEntity.status(httpStatus).body(new ErrorResult("Bu mail zaten kullanımda."));
         }
 
         return ResponseEntity.status(httpStatus).build();
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<?> isTokenValid(@RequestBody String token) {
+        System.out.println(token);
+       try{
+           return ResponseEntity.ok(tokenManager.validate(token));
+       }
+       catch(Exception e){
+           System.out.println(e.getMessage());
+           return ResponseEntity.ok(false);
+       }
     }
 }

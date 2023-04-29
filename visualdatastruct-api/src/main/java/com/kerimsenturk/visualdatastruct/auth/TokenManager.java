@@ -12,11 +12,11 @@ import java.util.Date;
 
 
 @Service
-public class TokenManager {
+public class TokenManager{
 
-    private final int validity=5*60*1000;
+    private final int validity=5*60*100000;
     private final String issuer="com.visualdatastruct";
-    private final Key key= Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final Key key=Keys.secretKeyFor(SignatureAlgorithm.HS256);
     public Token generate(String mail){
         String tokenKey=Jwts.builder()
                 .setSubject(mail)
@@ -26,7 +26,7 @@ public class TokenManager {
                 .signWith(key)
                 .compact();
 
-        return new DefaultToken(tokenKey, new Date(System.currentTimeMillis()).getTime(),"Bearer Jwt Token");
+        return new DefaultToken(tokenKey, new Date().getTime(),"Bearer Jwt Token");
     }
 
     private Claims getClaims(String token) {
