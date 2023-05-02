@@ -1,0 +1,120 @@
+
+.sidebar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 100px;
+    margin-top: 10px;
+    margin-left: 20px;
+    
+  }
+  
+  .sidelist {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 10px;
+    padding: 1rem;
+    margin-top: 8rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    border:3px solid black;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+    top: 0;
+    bottom:0;
+    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    max-height: 100%;
+  }
+  
+  
+  .sidelist>li {
+    padding: 1rem 2rem 1.15rem;
+    border: 1px white solid;
+    border-radius: 10px;
+    font-weight: bold;
+    background-position: 75%;
+    outline: 2px solid #CCC;
+    height: auto;
+    width: auto;
+    display: inline;
+    min-width: 400px;
+  }
+  
+  .sidelist>li:hover {
+    background-color: rgb(119, 20, 20);
+  }
+  
+  .content{
+    margin: 8rem 10rem 20rem 30rem;
+    padding: 1rem 1rem 1rem 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+  }
+  
+  .rightitem {
+    float: right;
+  }
+  
+  .leftitem {
+    float: left;
+  }
+  
+  .centeritem>ul>li {
+    background-color: cadetblue;
+  }
+  
+  .sidelist::-webkit-scrollbar-track
+  {
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      background:transparent;
+  }
+  
+  .sidelist::-webkit-scrollbar
+  {
+      width: 15px; 
+    border-radius: 10px;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+      background:transparent;
+  }
+  
+  .sidelist::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+    background-color: rgba(182, 182, 182, 0.9);
+  }
+
+ 
+ .bg{
+  background-image: url('../../public/img/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 65rem;
+  position:fixed;
+  z-index: -1;
+
+ }
+  
+  /* Position text in the middle */
+  .middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+  
+  /* Style the <hr> element */
+  hr {
+    margin: auto;
+    width: 100%;
+  }

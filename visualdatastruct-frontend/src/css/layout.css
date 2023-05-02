@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css?family=Jura:400');
+
+body {
+  font-family: Jura, Arial;
+  font-weight: 400;
+}
+
+#courseMainBody {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+
+
+
+
+nav {
+  display: flex;
+  height: 75px;
+  justify-content: space-between;
+  text-align: center;
+  gap: 10 0px;
+  position: fixed;
+  margin-top: 10px;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+}
+
+nav>div>ul {
+  display: flex;
+  margin: auto;
+  height: 75px;
+
+  justify-content: space-evenly;
+  text-align: center;
+  gap: 10px;
+}
+
+nav>div>ul>li {
+  padding: 1rem 2rem 1.15rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #ebebeb;
+  height: auto;
+  width: auto;
+  margin: auto;
+  display: inline;
+  border: 1px white solid;
+  border-radius: 10px;
+  font-weight: bold;
+  background-position: 75%;
+  outline: 2px solid #CCC;
+}
+
+nav>div>ul>li:hover {
+  background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
+  background-size: 100% 100%;
+  color: #ffffff;
+  animation: spring 500ms ease-out;
+  text-shadow: 0 -1px 0 rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+nav>div>ul>li:active {
+  transform: translateY(4px);
+}
+
+.rightitem {
+  float: right;
+}
+
+.leftitem {
+  float: left;
+}
+
+.centeritem>ul>li {
+  background-color: cadetblue;
+}
+
+
+
+@keyframes spring {
+  15% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.2, 1.1);
+  }
+
+  40% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(0.95, 0.95);
+  }
+
+  75% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.05, 1);
+  }
+
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1, 1);
+  }
+
+
+
+}
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}

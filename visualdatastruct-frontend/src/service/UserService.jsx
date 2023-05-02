@@ -32,7 +32,11 @@ const UserService = {
          console.log(res);
 
          if(res.success === true){
-            localStorage.setItem("user",res.data.key);
+            localStorage.setItem("token",res.data.token.key);
+            localStorage.setItem("mail",res.data.mail)
+            localStorage.setItem("name",res.data.name)
+            localStorage.setItem("surname",res.data.surname)
+
          }
     },
 

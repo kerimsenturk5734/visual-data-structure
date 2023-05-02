@@ -22,7 +22,7 @@ class AuthCheck extends Component {
 
   render() {
     //console.log(this.props)
-    const token = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
     this.validateToken(token);
 
     if(token === null){
