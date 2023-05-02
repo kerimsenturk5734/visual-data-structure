@@ -1,8 +1,10 @@
 package com.kerimsenturk.visualdatastruct.controller;
 
 import com.kerimsenturk.visualdatastruct.auth.TokenManager;
+import com.kerimsenturk.visualdatastruct.dto.UserWithToken;
 import com.kerimsenturk.visualdatastruct.dto.request.LoginUserRequest;
 import com.kerimsenturk.visualdatastruct.dto.request.RegisterUserRequest;
+import com.kerimsenturk.visualdatastruct.model.User;
 import com.kerimsenturk.visualdatastruct.service.UserService;
 import com.kerimsenturk.visualdatastruct.utilities.results.ErrorResult;
 import com.kerimsenturk.visualdatastruct.utilities.results.SuccessDataResult;
@@ -40,11 +42,16 @@ public class UserController {
             authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginUserRequest.getMail(),loginUserRequest.getPassword()));
 
+            User user = userService.getByMail(loginUserRequest.getMail());
+
+            UserWithToken userWithToken= new UserWithToken(
+                    user.getName(),
+                    user.getSurname(),
+                    user.getMail(), tokenManager.generate(user.getMail()));
+
             return ResponseEntity
                     .status(HttpStatus.ACCEPTED)
-                    .body(new SuccessDataResult<>(
-                            tokenManager.generate(loginUserRequest.getMail()),
-                            "Giriş Başarılı"));
+                    .body(new SuccessDataResult<>(userWithToken, "Giriş Başarılı"));
         }
         catch (Exception e){
             System.out.println(e.getMessage()+" for " +loginUserRequest.getMail());
