@@ -51,10 +51,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             }
         }
         HttpServletResponse res = (HttpServletResponse) response;
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
         res.setHeader("Access-Control-Max-Age", "3600");
-        res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, x-requested-with, Cache-Control");
+        res.setHeader("Access-Control-Allow-Headers", "Authorization,Authentication, Content-Type, Accept, x-requested-with, Cache-Control");
 
         filterChain.doFilter(request,response);
     }
