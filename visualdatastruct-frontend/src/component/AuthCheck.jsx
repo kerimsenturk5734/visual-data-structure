@@ -28,12 +28,10 @@ class AuthCheck extends Component {
     if(token === null){
         {alert("Lütfen giriş yapin")}
         return (
-            <Navigate replace to="/"/>
-            
+            <Navigate replace to="/"/>      
         )       
     }
     else if(this.state.confirm === null){
-        //console.log(this.state.confirm)
         return (
             <Loader.TailSpin
                 type="Puff"
@@ -44,8 +42,6 @@ class AuthCheck extends Component {
         )
     }  
    else{
-        //console.log(this.props)
-        //console.log(this.state)
         if(this.state.confirm){
             if(this.props.path === undefined)
                 return (
@@ -56,13 +52,12 @@ class AuthCheck extends Component {
                 <Navigate replace to={this.props.path} state={true}/>
             )
         }
-    else{
-        //{alert("Lütfen giriş yapın")}
-        return (
-            <Navigate replace to="/" />
-        )
+        else{
+            return (
+                <Navigate replace to="/" />
+            )
+        }
     }
-   }
 
   }
 }

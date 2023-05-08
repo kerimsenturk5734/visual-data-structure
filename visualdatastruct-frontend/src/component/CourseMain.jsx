@@ -12,7 +12,7 @@ export default function CourseMain() {
 
     const [name,] = useState(localStorage.getItem("name"));
     const [surname,] = useState(localStorage.getItem("surname"));
-    const [currentCourse,setCurrentCourse] = useState();
+    const [currentContent,setCurrentContent] = useState();
 
     if(isAuth === true){
         console.log(location)
@@ -29,22 +29,46 @@ export default function CourseMain() {
                     </div>
                     <div className="centeritem">
                         <ul>
-                            <li onClick={()=>{setCurrentCourse("stack")}}><img src="https://cdn-icons-png.flaticon.com/32/2111/2111690.png" alt='Stack' /> Stack</li>
-                            <li onClick={()=>{setCurrentCourse("queue")}}><img src="https://cdn-icons-png.flaticon.com/32/8201/8201691.png" alt='Queue' /> Queue</li>
-                            <li onClick={()=>{setCurrentCourse("linkedlist")}}><img src="https://cdn-icons-png.flaticon.com/32/3462/3462381.png" alt='Linked List' /> Linked List</li>
-                            <li onClick={()=>{setCurrentCourse("tree")}}><img src="https://cdn-icons-png.flaticon.com/32/4160/4160135.png" alt='Tree' /> Tree</li>
-                            <li onClick={()=>{setCurrentCourse("graph")}}><img src="https://cdn-icons-png.flaticon.com/32/4858/4858761.png" alt='Graph' /> Graph</li>
+                            <li onClick={()=>{setCurrentContent("stack")}}>
+                                <img src="https://cdn-icons-png.flaticon.com/32/2111/2111690.png" alt='Stack' /> 
+                                Stack
+                            </li>
+                            <li onClick={()=>{setCurrentContent("queue")}}>
+                                <img src="https://cdn-icons-png.flaticon.com/32/8201/8201691.png" alt='Queue' /> 
+                                Queue
+                            </li>
+                            <li onClick={()=>{setCurrentContent("linkedlist")}}>
+                                <img src="https://cdn-icons-png.flaticon.com/32/3462/3462381.png" alt='Linked List' /> 
+                                Linked List
+                            </li>
+                            <li onClick={()=>{setCurrentContent("tree")}}>
+                                <img src="https://cdn-icons-png.flaticon.com/32/4160/4160135.png" alt='Tree' /> 
+                                Tree
+                            </li>
+                            <li onClick={()=>{setCurrentContent("graph")}}>
+                                <img src="https://cdn-icons-png.flaticon.com/32/4858/4858761.png" alt='Graph' /> 
+                                Graph
+                            </li>
                         </ul>
                     </div>
                     <div className="rightitem ">
                         <ul>
-                            <li className="bg-dark"><i className="fa fa-user fa-xl"></i>{` ${name} ${surname}`}</li>
-                            <li id="logout" className="bg-danger" style={{padding:'10px'}}>Log Out</li>
+                            <li className="bg-dark" 
+                                onClick={()=>{setCurrentContent("profile")}}>
+                                <i className="fa fa-user fa-xl"></i>
+                                {` ${name} ${surname}`}
+                            </li>
+                            <li id="logout" 
+                                className="bg-danger" 
+                                style={{padding:'10px'}}
+                                onClick={()=>{}}>
+                                Log Out
+                            </li>
                         </ul>
                     </div>
                 </nav>
                 <div>
-                    {ContentFactory(currentCourse)};
+                    {ContentFactory(currentContent)};
                 </div>
             </div>
         )
