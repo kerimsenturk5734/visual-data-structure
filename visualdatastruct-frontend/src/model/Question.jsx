@@ -1,8 +1,10 @@
+import {Choice} from './Choice'
+
 export class Question{
-    constructor(id,description,image,choices){
+    constructor(id,description){
         this.id=id;//int
         this.description=description;//String
-        this.image=image;//Image
-        this.choices=choices;//Choice[]
+        this.image=new Image();//Image
+        this.choices=[new Choice()];//Choice[]
     }
 }

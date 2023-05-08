@@ -1,8 +1,13 @@
+import {Question} from './Question'
+import { Section } from './Section';
+
 export class Course{
-    constructor(id,name,sections,questions){
+    constructor(id,name){
         this.id=id;//int
         this.name=name;//String
-        this.sections=sections;//Section[]
-        this.questions=questions;//Question[]
+        this.sections=[new Section()];//Section[]
+        this.questions=[new Question()]//Question[]
     }
+
+    
 }
