@@ -12,10 +12,9 @@ export default function CourseMain() {
 
     const [name,] = useState(localStorage.getItem("name"));
     const [surname,] = useState(localStorage.getItem("surname"));
-    const [currentContent,setCurrentContent] = useState();
+    const [currentContent,setCurrentContent] = useState("content");
 
     if(isAuth === true){
-        console.log(location)
         return (
             <div className="courseMainBody">
                 <nav className="container-fluid">

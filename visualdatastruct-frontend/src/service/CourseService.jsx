@@ -31,7 +31,6 @@ const CourseService = {
 
 const getFetch =  function(ENDPOINT){
     const token=localStorage.getItem("token");
-    console.log(token);
     return fetch(ENDPOINT, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
