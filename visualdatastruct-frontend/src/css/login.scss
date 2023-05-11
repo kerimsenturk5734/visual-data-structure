@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Jura:400');
-* { font-family: Jura, Arial; font-weight: 400; font-size:medium}
+//* { font-family: Jura, Arial; font-weight: 400; font-size:medium}
 body { margin: 0; padding: 0; }
 h1,h2,h3,h4,h5,h6,p { margin: 0; }
 
@@ -32,7 +32,7 @@ section#entry-page {
     fieldset {
       margin: 0;
       background-color: #fff;
-      font-size: 2em;
+      
       border: none;
       border-radius: 5px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.2);
