@@ -28,6 +28,12 @@ public class ResultController {
     public ResponseEntity<List<Result>> getByUserId(@PathVariable(name = "uid") int uid){
         return ResponseEntity.of(Optional.of(resultService.getByUserId(uid)));
     }
+
+    @GetMapping("/user_mail_{mail}")
+    public ResponseEntity<List<Result>> getByUser_Mail(@PathVariable(name = "mail") String mail){
+        return ResponseEntity.of(Optional.of(resultService.getByUser_Mail(mail)));
+    }
+
     @GetMapping("user_uid_{uid}/course_id_{courseId}")
     public ResponseEntity<Result>
     getByUserIdAndCourseId(@PathVariable(name = "uid") int uid, @PathVariable(name="courseId") int courseId){

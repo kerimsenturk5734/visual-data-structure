@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ResultRepository extends JpaRepository<Result,Integer> {
     Optional<List<Result>> findByUser_Uid(int uid);
+    Optional<List<Result>> findByUser_Mail(String mail);
     Optional<Result> findByUser_UidAndCourse_Id(int uid,int courseId);
 }

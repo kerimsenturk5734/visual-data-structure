@@ -26,7 +26,11 @@ public class ResultService {
         Optional<Result> result=resultRepository.findById(id);
         return result.orElseThrow();
     }
+    public List<Result> getByUser_Mail(String mail){
+        Optional<List<Result>> resultList=resultRepository.findByUser_Mail(mail);
 
+        return resultList.orElseThrow();
+    }
     public Result getByUserIdAndCourseId(int uid,int courseId){
         Optional<Result> result=resultRepository.findByUser_UidAndCourse_Id(uid,courseId);
 
