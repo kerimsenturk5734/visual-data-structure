@@ -9,6 +9,7 @@ import org.springframework.security.core.token.Token;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserWithToken {
+    private int uid;
     private String name;
     private String surname;
     private String mail;

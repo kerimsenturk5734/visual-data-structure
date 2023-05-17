@@ -45,6 +45,7 @@ public class UserController {
             User user = userService.getByMail(loginUserRequest.getMail());
 
             UserWithToken userWithToken= new UserWithToken(
+                    user.getUid(),
                     user.getName(),
                     user.getSurname(),
                     user.getMail(), tokenManager.generate(user.getMail()));
