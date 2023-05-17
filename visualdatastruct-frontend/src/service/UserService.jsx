@@ -33,6 +33,7 @@ const UserService = {
 
          if(res.success === true){
             localStorage.setItem("token",res.data.token.key);
+            localStorage.setItem("uid",res.data.uid)
             localStorage.setItem("mail",res.data.mail)
             localStorage.setItem("name",res.data.name)
             localStorage.setItem("surname",res.data.surname)
@@ -51,7 +52,13 @@ const UserService = {
             headers: { 'Content-Type': 'application/json' },
             body:token,
            })
-           .then((response) => response.json())
+           .then((response) =>{
+                if(response.status === 403){
+                    alert("Lütfen giriş yapınız.")
+                    window.location.replace("/");
+                }
+                return response.json()
+           })
            .then((responseJson) => {
                 UserService.setResponse(responseJson);
                // console.log(responseJson);

@@ -35,7 +35,13 @@ const getFetch =  function(ENDPOINT){
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
        })
-       .then((response) => response.json())
+       .then((response) => {
+            if(response.status === 403){
+                alert("Lütfen giriş yapınız.")
+                window.location.replace("/");
+            }
+            return response.json()
+        })
        .then((responseJson) => {
             CourseService.setResponse(responseJson);
             console.log(responseJson)
