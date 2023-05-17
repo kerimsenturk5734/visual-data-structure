@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import '../css/content.css'
 import {Course} from '../model/Course';
 import CourseSourceFactory from './CourseSource';
-
-
+import ResultService from '../service/ResultService'
+import {Result} from '../model/Result'
+import '../css/profileLayout.css'
+import ProfileCard from './ProfileCard';
 
 export function Content() {
     const [name] = useState(localStorage.getItem("name"));
@@ -22,36 +24,114 @@ export function Content() {
 }
 
 export function Profile(){
+    const [uid] = useState(localStorage.getItem("uid"));
+    const [results,setResults] = useState([new Result(0,-1)])
+    const [confirm, setConfirm] = useState(false);
+    var totalStar = 0;
+    var fiveStarCount=0;
+
+    useEffect(()=>{
+        async function fetchData(){
+            await ResultService.getByUID(uid)
+            var res = [];//API returns array
+            res = ResultService.getResponse();
+
+            if(res.length === 0)
+                setResults(res);
+            console.log(res);
+            res.map((element, index) => {
+                var el = new Result();
+
+                el.id = element.id;
+                el.result = element.result;
+
+                var course = element.course;
+                el.course = new Course(course.id,course.name);
+
+                results[index] = el;
+            })
+
+            console.log(results);
+            setConfirm(true);
+        }
+
+        fetchData();
+    },[])
+
+    if(!confirm){
+        return <div>Loading</div>
+    }
+    else if(results.length === 0){
+        return (
+            <div className=' resultContent container'>
+                <ul className="results">
+                    <h1 className="align-center">Sonuçlar</h1>
+                    <li className="glow-on-hover">
+                        Henüz bir sınava girmediniz. Yukardan bir kurs seç ve hemen sınava gir.
+                    </li>     
+                </ul>
+                <ProfileCard resultCount={0} totalStar={0} fiveStarCount={0}/>
+            </div>
+        )
+    }
     return (
-        <div>profile</div>
+        <div className='resultContent container-fluid'>
+            <ul className="results">
+                <h1 className="align-center">Sonuçlar</h1>
+                <hr />
+                {results.map((element)=>{
+                    totalStar+=element.result;
+
+                    if(element.result === 5)
+                        fiveStarCount++;
+
+                    return (
+                        <li key={element.id} className='glow-on-hover'>{element.course.name}
+                            {
+                                [...Array(element.result)].map((e,i) => <span className="fa fa-star fa-spin fa-xl" key={i}></span>)
+                            }
+                        </li>
+                    )
+                })}
+                
+            </ul>
+            <ProfileCard resultCount={results.length} totalStar={totalStar} fiveStarCount={fiveStarCount}/>    
+        </div>
     )
 }
 
 
 
-function Render(courseName){
+export default function Render({courseName}){
     const [course,setCourse] = useState(new Course(0))
     const [currentSection,setCurrentSection]= useState();
     const [sectionIndex,setSectionIndex] = useState(0);
     const [confirm,setConfirm] = useState(false);
+    const [contentName,setContentName] = useState();
+    const forceUpdate = React.useCallback(() => setContentName({}), []);
 
-    const isItCourse=()=>{
-        console.log(courseName+"çalışti")
-        return (courseName !== "profile" && courseName !== "content");
-    }
+    
+    useEffect(()=>{
+        setContentName({})
+        setContentName(courseName);
+    },[courseName])
 
     useEffect(()=>{
+        const isItCourse=()=>{
+            return (courseName !== "profile" && courseName !== "content");
+        }
+    
        if(isItCourse()){
+            console.log(contentName+"çalışti")
             async function fetchData(){
-                await CourseSourceFactory(courseName).then((res)=>{
+                await CourseSourceFactory(contentName).then((res)=>{
                     setCourse(res);
                     console.log("deneme");
                 })
             }   
-
             fetchData();
        }
-    },[courseName])
+    },[contentName])
 
    
     useEffect(()=>{
@@ -59,6 +139,7 @@ function Render(courseName){
             let section=course.sections[0];
             setSectionIndex(0);
             setCurrentSection(section);
+            console.log("section yüklendi")
         }
     },[course])
 
@@ -76,8 +157,6 @@ function Render(courseName){
         }
             
     },[currentSection])
-
-    
 
     const forwardPage = () => {
         const newIndex=sectionIndex+1;
@@ -134,24 +213,22 @@ function Render(courseName){
                 <button onClick={()=>{backwardPage()}}><i className="fa fa-play" style={{fontsize:'3rem', transform: 'scaleX(-1)'}}></i></button>
                 <button onClick={()=>{forwardPage()}} className='rightitem'><i className="fa fa-play" style={{fontsize:'3rem'}}></i></button>
             </div>
-            <ul className="content">
-                <li>
+
+            <ul className='images'>
                     {currentSection.imagePaths.map((path)=>{//fix picture
-                        return (
-                            <img key={path} src={path} width={256} height={256}></img>
-                        )
-                    })}
-                </li>
-                
+                            return (
+                                <li>
+                                    <img key={path} src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
+                                </li>
+                            )
+                        })}
+                     <li>
+                        <img key={"sad"} src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
+                    </li>               
             </ul>
         </div>
         )
     }
    
     
-}
-
-
-export default function ContentFactory(course){
-    return Render(course);
 }

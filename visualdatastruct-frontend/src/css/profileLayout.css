@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Jura:400');
+
+.resultContent {
+  display: flex;
+  justify-content: flex-start;
+  gap:3.72rem;
+  flex-wrap: wrap;
+  /*margin-top: 10px;*/
+  
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: flex-start;
+  row-gap: 10px;
+  padding: 1rem;
+  margin-top: 8rem;
+  margin-left: 4rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  border: 3px solid black;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+  top: 0;
+  /*bottom:0;*/
+  width: 65%;
+  z-index: -1;
+}
+
+
+.results>li {
+  padding: 1rem 2rem 1.15rem;
+  border: 1px white solid;
+  border-radius: 10px;
+  font-weight: bold;
+  background-position: 75%;
+  outline: 2px solid #CCC;
+  height: auto;
+  width: auto;
+  display: inline;
+  min-width: 100%;
+  font-family: monospace;
+}
+
+.results>li:hover {
+  background-color: rgb(119, 20, 20);
+}
+
+li>span{
+  padding: 0.2rem;
+  margin-top: 10px;
+  float: right;
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  align-items: center;
+  row-gap: 10px;
+  padding: 1rem;
+  margin-top: 8rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 0 10px 5px #dcdad8,
+              0 0 20px 7px #ebecca,
+              0 0 25px 10px #8a2be2,
+              0 0 30px 20px #ff1493;
+  top: 0;
+  border:2px solid gray;
+  position:relative;
+  z-index: -1;
+
+}
+
+
+.statistic{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap:1rem;
+}
+
+.statistic>div>div{
+  border:3px solid black;
+  padding: 4px;
+}
+
+.name{
+  font-size: x-large;
+}
