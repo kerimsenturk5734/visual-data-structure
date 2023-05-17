@@ -53,6 +53,7 @@ nav>div>ul>li {
   cursor: pointer;
   color: #ebebeb;
   height: auto;
+  max-height: 70px;
   width: auto;
   margin: auto;
   display: inline;

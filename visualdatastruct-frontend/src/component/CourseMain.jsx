@@ -1,18 +1,44 @@
 
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router-dom';
 import {AuthCheckBuilder} from './AuthCheck'
-import ContentFactory from './Content';
-import '../css/layout.css'
+import Render from './Content';
+import '../css/layout.css';
+import '../css/mymodal.css';
+import { useEffect } from 'react';
 //import * as Loader from 'react-loader-spinner'
 
 export default function CourseMain() {
     const location = useLocation();
+    const navigate = useNavigate();
     const isAuth = location.state;
 
     const [name,] = useState(localStorage.getItem("name"));
     const [surname,] = useState(localStorage.getItem("surname"));
     const [currentContent,setCurrentContent] = useState("content");
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(()=>{
+        let modal = document.getElementById("myModal");
+        if(modal !== null){
+            if(isOpen){
+                modal.style.display = "block"; 
+            }
+            else{
+                modal.style.display = "none";
+            }
+        }
+    },[isOpen])
+
+    const cancel = () =>{
+        setIsOpen(false);
+    }
+
+    const confirm = () =>{
+        localStorage.clear();
+        document.getElementById("text-content").textContent = "Çıkış yapılıyor...";
+        setTimeout(()=>{navigate("/courseMain")},2000)
+    }
 
     if(isAuth === true){
         return (
@@ -60,14 +86,29 @@ export default function CourseMain() {
                             <li id="logout" 
                                 className="bg-danger" 
                                 style={{padding:'10px'}}
-                                onClick={()=>{}}>
+                                onClick={()=>{setIsOpen(true)}}>
                                 Log Out
                             </li>
                         </ul>
                     </div>
                 </nav>
                 <div>
-                    {ContentFactory(currentContent)};
+                    <Render courseName={currentContent}/>
+                    {isOpen
+                        ?
+                        <div id="myModal" class="modal container-fluid">
+                            <div class="modal-content">
+                                <span class="close" onClick={()=>{setIsOpen(false)}}>&times;</span>
+                                <center id="text-content">Çıkış yapmak istediğinize emin misiniz?</center>
+                                <div className='buttons'>
+                                    <button className='btn-danger' onClick={cancel}>İptal Et</button>
+                                    <button className='btn-alert' onClick={confirm}>Çıkış Yap</button>
+                                </div>
+                            </div>  
+                        </div>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
         )
