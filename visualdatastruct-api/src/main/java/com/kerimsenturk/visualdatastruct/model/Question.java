@@ -1,5 +1,6 @@
 package com.kerimsenturk.visualdatastruct.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,8 @@ public class Question {
     private Byte[] image;
     @OneToMany(mappedBy = "question")
     private List<Choice> choices;
+
+    @JsonIgnore()
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
