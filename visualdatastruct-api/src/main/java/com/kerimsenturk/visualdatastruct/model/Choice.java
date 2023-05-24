@@ -1,5 +1,7 @@
 package com.kerimsenturk.visualdatastruct.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +21,12 @@ public class Choice {
     @Column(name = "choice_description",nullable = false,length = 50)
     private String description;
 
+    @JsonProperty("isAnswer")
     @Column(name = "is_answer",nullable = false)
     private boolean isAnswer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore()
+    @ManyToOne()
     @JoinColumn(name = "question_id")
     private Question question;
 }
