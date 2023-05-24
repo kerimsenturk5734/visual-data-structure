@@ -22,7 +22,6 @@
   top: 0;
   /*bottom:0;*/
   position: fixed;
-  overflow-y: scroll;
   overflow-x: hidden;
   max-height: 100%;
   align-items: flex-start; 
@@ -42,12 +41,28 @@
   min-width: 400px;
 }
 
+.exam{
+  margin-top: 2rem;
+  border:2px solid black !important;
+  font-size: larger;
+  font-family:monospace;
+}
+
+#myModalContent{
+  background-color: #fefefe;
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+}
+
 .sidelist>li:hover {
   background-color: rgb(119, 20, 20);
 }
 
 .content {
-  margin: 8rem -29rem 0rem 30rem;
+  margin: 8rem -29rem 0rem 29rem;
   padding: 1rem 1rem 1rem 1rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
@@ -60,7 +75,7 @@
   padding: 1rem 1rem 1rem 1rem;
 }
 .content>p{
-  font-family: monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding:1rem 2rem 2rem 2rem;
 }
 
@@ -212,6 +227,7 @@ hr {
   top: 0;
   border-radius: 10px;
 }
+
 
 @keyframes glowing {
   0% { background-position: 0 0; }

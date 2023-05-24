@@ -24,8 +24,8 @@ export default function MyDialog({value}) {
 
     return (
       <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onClick={cancel}>&times;</span>
+        <div className="modal-content">
+          <span className="close" onClick={cancel}>&times;</span>
           <p id="text-content">Some text in the Modal..</p>
         </div>
       </div>

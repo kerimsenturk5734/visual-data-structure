@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import '../css/content.css'
+import ReactDOM from 'react-dom/client';
+
 import {Course} from '../model/Course';
+import {Result} from '../model/Result'
+
 import CourseSourceFactory from './CourseSource';
 import ResultService from '../service/ResultService'
-import {Result} from '../model/Result'
+
 import '../css/profileLayout.css'
+import '../css/content.css'
+
 import ProfileCard from './ProfileCard';
+import Exam from './Exam';
+
 
 export function Content() {
     const [name] = useState(localStorage.getItem("name"));
@@ -38,7 +45,6 @@ export function Profile(){
 
             if(res.length === 0)
                 setResults(res);
-            console.log(res);
             res.map((element, index) => {
                 var el = new Result();
 
@@ -51,7 +57,6 @@ export function Profile(){
                 results[index] = el;
             })
 
-            console.log(results);
             setConfirm(true);
         }
 
@@ -108,8 +113,8 @@ export default function Render({courseName}){
     const [sectionIndex,setSectionIndex] = useState(0);
     const [confirm,setConfirm] = useState(false);
     const [contentName,setContentName] = useState();
-    const forceUpdate = React.useCallback(() => setContentName({}), []);
-
+    const [isExamOpen,setIsExamOpen] = useState(false);
+    const [isCourseFinished, setIsCourseFinished] = useState(false);
     
     useEffect(()=>{
         setContentName({})
@@ -122,12 +127,9 @@ export default function Render({courseName}){
         }
     
        if(isItCourse()){
-            console.log(contentName+"çalışti")
             async function fetchData(){
                 await CourseSourceFactory(contentName).then((res)=>{
-                    setCourse(res);
-                    console.log("deneme");
-                })
+                    setCourse(res);                })
             }   
             fetchData();
        }
@@ -138,9 +140,7 @@ export default function Render({courseName}){
         if(course.id!== 0){
             let section=course.sections[0];
             setSectionIndex(0);
-            setCurrentSection(section);
-            console.log("section yüklendi")
-        }
+            setCurrentSection(section);        }
     },[course])
 
     useEffect(()=>{
@@ -157,6 +157,19 @@ export default function Render({courseName}){
         }
             
     },[currentSection])
+
+    useEffect(()=>{
+        let modal = document.getElementById("myModal");
+        if(modal !== null){
+            if(isExamOpen){
+                modal.style.display = "block"; 
+            }
+            else{
+                modal.style.display = "none";
+            }
+        }
+    },[isExamOpen])
+
 
     const forwardPage = () => {
         const newIndex=sectionIndex+1;
@@ -179,6 +192,20 @@ export default function Render({courseName}){
         setCurrentSection(course.sections[index]);
         document.getElementById("section"+sectionIndex).style.border = "none";
         setSectionIndex(index);
+    }
+
+    const openExam = () => {
+        let modalContent = document.getElementById("myModalContent")
+            .innerHTML="<p class='dot-load'>Sınav Başlıyor...</p>";
+        
+        setTimeout(()=>{startExam()},2000)
+    }
+
+    const startExam = () => {
+        const modalContentElement = document.getElementById('myModalContent');
+        modalContentElement.style.width = "70%"
+        const modalContent = ReactDOM.createRoot(modalContentElement);
+        modalContent.render(<Exam course={course} setIsExamOpen={setIsExamOpen}/>)
     }
 
     if(courseName === "profile"){
@@ -205,7 +232,16 @@ export default function Render({courseName}){
                     )
                     })
                 }
-                
+                <hr />
+                {isCourseFinished
+                    ?
+                        <></>
+                    :
+                        <li key="exam" className="exam glow-on-hover" onClick={()=>setIsExamOpen(true)}>
+                            <img src="https://cdn-icons-png.flaticon.com/32/10803/10803837.png" alt="" className='leftitem'/>
+                            <center>Go To The Exam</center>
+                        </li>
+                }
             </ul>
             <div className="content textcontent">
                 <h2>{currentSection.title}</h2>
@@ -217,8 +253,8 @@ export default function Render({courseName}){
             <ul className='images'>
                     {currentSection.imagePaths.map((path)=>{//fix picture
                             return (
-                                <li>
-                                    <img key={path} src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
+                                <li key={path}>
+                                    <img src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
                                 </li>
                             )
                         })}
@@ -226,6 +262,23 @@ export default function Render({courseName}){
                         <img key={"sad"} src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
                     </li>               
             </ul>
+
+            {isExamOpen
+                ?
+                <div id="myModal" class="modal container-fluid">
+                    <div id="myModalContent">
+                        <span className="close" onClick={() => setIsExamOpen(false)}>&times;</span>
+                        <center id="text-content">Sınava girmek istediğinize emin misiniz?</center>
+                        <center id="text-content"><i style={{color:"red"}}>*Bir kere girdikten sonra çıkış yapamazsınız</i></center>
+                        <div className='buttons'>
+                            <button className='btn-danger' onClick={() => setIsExamOpen(false)}>İptal Et</button>
+                            <button className='btn-alert' onClick={openExam}>Sınava Gir</button>
+                        </div>
+                    </div>  
+                </div>
+                :
+                <></>
+            }
         </div>
         )
     }

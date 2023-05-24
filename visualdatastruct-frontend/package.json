@@ -10,6 +10,7 @@
     "mdb-react-ui-kit": "^6.0.0",
     "primereact": "^9.4.0",
     "react": "^18.2.0",
+    "react-confirm-alert": "^3.0.6",
     "react-dialog-confirm": "^1.0.3",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
