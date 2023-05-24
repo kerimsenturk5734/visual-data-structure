@@ -1,0 +1,64 @@
+
+.quiz-header>h2{
+    background-color: rgb(245, 245, 246);
+    border-radius: 1rem;
+    width: 50%;
+    margin-left: 25%;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.exam-root{
+    display: flex;
+    flex-direction: column;   
+    gap:2rem;
+    font-size: large;
+}
+
+.quiz-body{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    padding: 1rem;
+}
+
+.options{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin:1.7rem;
+    
+}
+
+.option{
+    flex: 1 0 35%;
+    margin: 10px;
+    padding: 2px;
+    background-color: rgb(245, 245, 246);
+    box-shadow: 2px 3px 4px 5px rgba(34, 34, 33, 0.2);
+}
+
+.option>label{
+    margin:8px;
+}
+
+.btn-answer{
+    margin-left: auto;
+    float: right;
+    background-color: rgb(219, 198, 11);
+    cursor:pointer;
+}
+
+.btn-answer-submit{
+    background-color: rgb(219, 42, 11);
+    float: right;
+    color: white;
+}
+
+.btn-answer-submit>img{
+    filter: invert(100%);
+}
+
+.confirm-buttons>button{
+    margin: 0 100px 0 100px;
+}
