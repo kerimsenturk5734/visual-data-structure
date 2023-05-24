@@ -7,3 +7,11 @@ export class Result{
         this.course=new Course();//new Course()
     }
 }
+
+export class CreateResultRequest {
+    constructor(result,userId,courseId){
+        this.result = result;
+        this.userId = userId;
+        this.courseId = courseId;
+    }
+}
