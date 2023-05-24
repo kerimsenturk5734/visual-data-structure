@@ -51,11 +51,22 @@ public class ResultService {
     }
 
     public HttpStatus add(CreateResultRequest createResultRequest){
-        if(isExist(createResultRequest.getUserId(),createResultRequest.getCourseId()))
-            return HttpStatus.CONFLICT;
-
         User user=userService.getByUID(createResultRequest.getUserId());
         Course course = courseService.getById(createResultRequest.getCourseId());
+
+        if(isExist(createResultRequest.getUserId(),createResultRequest.getCourseId())){
+            Optional<Result> resultOptional =resultRepository.findByUser_UidAndCourse_Id(createResultRequest.getUserId(),createResultRequest.getCourseId());
+            if(resultOptional.isPresent()){
+               Result result = resultOptional.get();
+               result.setResult(createResultRequest.getResult());
+               result.setCourse(course);
+               result.setUser(user);
+
+               resultRepository.save(result);
+
+               return HttpStatus.NO_CONTENT;
+            }
+        }
 
         Result result=new Result(0,createResultRequest.getResult(),user,course);
         resultRepository.save(result);

@@ -40,7 +40,7 @@ public class ResultController {
         return ResponseEntity.of(Optional.of(resultService.getByUserIdAndCourseId(uid,courseId)));
     }
     @PostMapping("/")
-    public ResponseEntity<?> add(CreateResultRequest createResultRequest){
+    public ResponseEntity<?> add(@RequestBody CreateResultRequest createResultRequest){
         return ResponseEntity.status(resultService.add(createResultRequest)).build();
     }
 
