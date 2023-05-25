@@ -43,9 +43,6 @@
   font-family: monospace;
 }
 
-.results>li:hover {
-  background-color: rgb(119, 20, 20);
-}
 
 li>span{
   padding: 0.2rem;

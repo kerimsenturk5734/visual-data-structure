@@ -170,7 +170,22 @@ export default function Render({courseName}){
         }
     },[isExamOpen])
 
+    useEffect(()=>{
+        var res = new Result();
+        const fetchResults = async () => {
+            await ResultService.getByUIDandCourseId(localStorage.getItem("uid"),course.id);
+            console.log(ResultService.getResponse());
+            res=ResultService.getResponse();
+            if(res.result === 5)
+                setIsCourseFinished(true);
+            else
+                setIsCourseFinished(false);
+        }
 
+        fetchResults();
+
+        
+    })
     const forwardPage = () => {
         const newIndex=sectionIndex+1;
         if( !(newIndex >= course.sections.length) ){
@@ -235,9 +250,11 @@ export default function Render({courseName}){
                 <hr />
                 {isCourseFinished
                     ?
-                        <></>
+                        <li key="exam" className="exam">
+                            <center>Bu kursu zaten bitirdiniz.</center>
+                        </li>
                     :
-                        <li key="exam" className="exam glow-on-hover" onClick={()=>setIsExamOpen(true)}>
+                        <li key="exam" className="exam glow-on-hover" onClick={()=>setIsExamOpen(true)} aria-disabled ="true">
                             <img src="https://cdn-icons-png.flaticon.com/32/10803/10803837.png" alt="" className='leftitem'/>
                             <center>Go To The Exam</center>
                         </li>

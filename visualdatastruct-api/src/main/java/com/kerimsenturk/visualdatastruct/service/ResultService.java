@@ -34,7 +34,7 @@ public class ResultService {
     public Result getByUserIdAndCourseId(int uid,int courseId){
         Optional<Result> result=resultRepository.findByUser_UidAndCourse_Id(uid,courseId);
 
-        return result.orElseThrow();
+        return result.orElse(null);
     }
 
     public List<Result> getByUserId(int uid){

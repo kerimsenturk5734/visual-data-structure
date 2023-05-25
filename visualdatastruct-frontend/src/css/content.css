@@ -57,10 +57,6 @@
   box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
 }
 
-.sidelist>li:hover {
-  background-color: rgb(119, 20, 20);
-}
-
 .content {
   margin: 8rem -29rem 0rem 29rem;
   padding: 1rem 1rem 1rem 1rem;

@@ -22,6 +22,10 @@ const ResultService = {
         await getFetch(`${GETBYUID_ENDPOINT}${uid}`);
     },
 
+    getByUIDandCourseId : async function (uid, courseId){
+        await getFetch(`${SERVICE_API_URL}/user_uid_${uid}/course_id_${courseId}`);
+    },
+
     add : async function (result) {
         await postFetch(result, ADD_ENDPOINT);
     }
@@ -30,7 +34,7 @@ const ResultService = {
 
 const getFetch =  function(ENDPOINT){
     const token=localStorage.getItem("token");
-
+    console.log(ENDPOINT);
     return fetch(ENDPOINT, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},

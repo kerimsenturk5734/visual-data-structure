@@ -3,6 +3,7 @@ package com.kerimsenturk.visualdatastruct.controller;
 import com.kerimsenturk.visualdatastruct.dto.request.CreateResultRequest;
 import com.kerimsenturk.visualdatastruct.model.Result;
 import com.kerimsenturk.visualdatastruct.service.ResultService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,12 @@ public class ResultController {
     @GetMapping("user_uid_{uid}/course_id_{courseId}")
     public ResponseEntity<Result>
     getByUserIdAndCourseId(@PathVariable(name = "uid") int uid, @PathVariable(name="courseId") int courseId){
-        return ResponseEntity.of(Optional.of(resultService.getByUserIdAndCourseId(uid,courseId)));
+        Result result = resultService.getByUserIdAndCourseId(uid,courseId);
+
+        if(result != null)
+            return ResponseEntity.ok(result);
+
+        return ResponseEntity.notFound().build();
     }
     @PostMapping("/")
     public ResponseEntity<?> add(@RequestBody CreateResultRequest createResultRequest){
