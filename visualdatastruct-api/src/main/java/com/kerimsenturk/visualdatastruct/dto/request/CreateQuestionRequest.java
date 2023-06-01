@@ -13,5 +13,6 @@ import java.util.List;
 public class CreateQuestionRequest {
     private String description;
     private Byte[] image;
+    private int level;
     private List<CreateChoiceRequest> choices;
 }

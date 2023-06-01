@@ -22,9 +22,10 @@ public class Question {
     private String description;
     @Column(name = "question_image")
     private Byte[] image;
+    @Column(name = "question_level")
+    private int level;
     @OneToMany(mappedBy = "question")
     private List<Choice> choices;
-
     @JsonIgnore()
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")

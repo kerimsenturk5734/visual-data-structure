@@ -28,6 +28,7 @@ public class QuestionDtoConverter implements DtoConverter<Question, QuestionDto>
                 from.getId(),
                 from.getDescription(),
                 from.getImage(),
+                from.getLevel(),
                 from.getChoices().stream().map(choiceDtoConverter::convert).collect(Collectors.toList()),
                 courseDtoConverter.convert(from.getCourse()));
     }
@@ -40,6 +41,7 @@ public class QuestionDtoConverter implements DtoConverter<Question, QuestionDto>
                 from.getId(),
                 from.getDescription(),
                 from.getImage(),
+                from.getLevel(),
                 from.getChoices().stream().map(choiceDtoConverter::convert).collect(Collectors.toList()),
                 courseDtoConverter.convert(from.getCourse()));
     }
@@ -52,6 +54,7 @@ public class QuestionDtoConverter implements DtoConverter<Question, QuestionDto>
                 0,
                 from.getDescription(),
                 from.getImage(),
+                from.getLevel(),
                 from.getChoices().stream().map(choiceDtoConverter::convert).collect(Collectors.toList()),
                 null);
     }

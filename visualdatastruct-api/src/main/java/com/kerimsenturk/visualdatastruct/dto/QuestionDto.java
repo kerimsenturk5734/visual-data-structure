@@ -13,6 +13,7 @@ public class QuestionDto {
     private int id;
     private String description;
     private Byte[] image;
+    private int level;
     private List<ChoiceDto> choices;
     private CourseDto course;
 
