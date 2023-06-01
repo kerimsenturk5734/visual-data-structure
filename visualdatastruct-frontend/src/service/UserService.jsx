@@ -29,7 +29,6 @@ const UserService = {
         
          await postFetch(loginUser, LOGIN_ENDPOINT);
          let res=state.response;
-         console.log(res);
 
          if(res.success === true){
             localStorage.setItem("token",res.data.token.key);
@@ -71,9 +70,7 @@ const UserService = {
 
     register: async function (name, surname, mail, password) {
         let registerUser = new RegisterUserRequest(name, surname, mail, password);
-        console.log(registerUser);
         await postFetch(registerUser, REGISTER_ENDPOINT);
-        console.log(state.response);
         
     }
 
@@ -90,7 +87,6 @@ const postFetch =  function(DATA, ENDPOINT){
        .then((response) => response.json())
        .then((responseJson) => {
             UserService.setResponse(responseJson);
-            console.log(responseJson);
        })
        .catch((error) => {
          console.error(error);

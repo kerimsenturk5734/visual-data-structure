@@ -21,7 +21,7 @@ class AuthCheck extends Component {
 
 
   render() {
-    //console.log(this.props)
+
     const token = localStorage.getItem("token");
     this.validateToken(token);
 
@@ -64,7 +64,7 @@ class AuthCheck extends Component {
 
 
 export function AuthCheckBuilder(path) {
-    //console.log(path);
+
   return (
     <AuthCheck path={path}/>
   )

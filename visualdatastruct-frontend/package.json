@@ -12,6 +12,7 @@
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",
     "react-dialog-confirm": "^1.0.3",
+    "react-doc-viewer": "^0.1.5",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.10.0",

@@ -1,0 +1,22 @@
+[
+    {
+        "title" : "Stack Nedir?",
+        "contentText" : "Stack, verilerin belirli bir düzen içinde depolandığı ve çıkarıldığı bir veri yapısıdır. Stack, son giren ilk çıkar (Last-In-First-Out - LIFO) prensibiyle çalışır. Bu, en son eklenen verinin ilk çıkarılacağı anlamına gelir. Stack'te verilere sadece en üstten (top) erişilebilir ve ekleme ya da çıkarma işlemleri yalnızca bu noktadan yapılır. Stack veri yapısı, birçok alanda kullanılır ve verilerin yönetiminde büyük kolaylık sağlar.",
+        "imagePaths" : ["https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Data_stack.svg/1200px-Data_stack.svg.png"]
+    },
+    {
+        "title" : "Temel Operasyonlar - Push, Pop ve Peek",
+        "contentText" : "Stack veri yapısının temel operasyonları üç tanedir: Push, Pop ve Peek. Push işlemi, yeni bir elemanı stack'in üstüne eklemek için kullanılır. Pop işlemi, en üstteki elemanı çıkararak stack'ten kaldırmak için kullanılır. Peek ise stack'in en üstündeki elemana erişmek için kullanılır, ancak elemanı çıkarmaz. Bu temel operasyonlar, stack veri yapısının işleyişini sağlar ve veri yönetimini kolaylaştırır.",
+        "imagePaths" : ["https://storage.googleapis.com/algodailyrandomassets/challenges/intro-to-stacks-1.png","https://storage.googleapis.com/algodailyrandomassets/challenges/intro-to-stacks-1.png"]
+    },
+    {
+        "title" : "Stack'in Kullanım Alanları",
+        "contentText" : "a. Fonksiyon çağrıları: Programlama dillerinde fonksiyonlar stack üzerinden yönetilir. Her bir fonksiyon çağrıldığında, geri dönüş adresi ve yerel değişkenler stack'e eklenir. Fonksiyon sonlandığında ise stack'ten çıkarılırlar.\n\nb. Tarayıcı geçmişi: Web tarayıcıları, kullanıcının ziyaret ettiği sayfaların geçmişini stack veri yapısını kullanarak takip eder. Her yeni sayfa ziyaret edildiğinde, URL'leri stack'e eklenir ve geri düğmesi ile önceki sayfalara geri dönüş yapılır.\n\nc. Geri alma işlemleri: Bir metin düzenleyici veya grafiksel bir arayüzde geri alma (undo) işlemleri stack veri yapısı kullanılarak yönetilebilir. Her yapılan işlem stack'e eklenir ve geri alma işlemi yapıldığında en son yapılan işlem geri alınır.",
+        "imagePaths" : [""]
+    },
+    {
+        "title" : "Stack Veri Yapısının Avantajları",
+        "contentText" : "a. Basit bir yapısı vardır ve uygulaması kolaydır. Push ve pop işlemleri sabit bir zamanda gerçekleştirilir.\n\nb. İşlev çağrılarını ve geçmiş takibini etkili bir şekilde yönetir. Fonksiyonların parametreleri ve değişkenleri stack üzerinde saklanır.\n\nc. Veri erişimi hızlıdır, çünkü en üstteki elemana (top) doğrudan erişilebilir.",
+        "imagePaths" : ["",""]
+    }
+]

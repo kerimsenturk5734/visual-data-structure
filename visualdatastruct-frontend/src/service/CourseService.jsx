@@ -44,7 +44,6 @@ const getFetch =  function(ENDPOINT){
         })
        .then((responseJson) => {
             CourseService.setResponse(responseJson);
-            console.log(responseJson)
        })
        .catch((error) => {
          console.error(error);

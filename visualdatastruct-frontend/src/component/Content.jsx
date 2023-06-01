@@ -14,6 +14,7 @@ import ProfileCard from './ProfileCard';
 import Exam from './Exam';
 
 
+
 export function Content() {
     const [name] = useState(localStorage.getItem("name"));
     const [surname] = useState(localStorage.getItem("surname"));
@@ -118,7 +119,9 @@ export default function Render({courseName}){
     
     useEffect(()=>{
         setContentName({})
-        setContentName(courseName);
+        
+        setTimeout(()=>{setContentName(courseName)},10)
+        console.log(contentName);
     },[courseName])
 
     useEffect(()=>{
@@ -174,7 +177,7 @@ export default function Render({courseName}){
         var res = new Result();
         const fetchResults = async () => {
             await ResultService.getByUIDandCourseId(localStorage.getItem("uid"),course.id);
-            console.log(ResultService.getResponse());
+
             res=ResultService.getResponse();
             if(res.result === 5)
                 setIsCourseFinished(true);
@@ -243,7 +246,7 @@ export default function Render({courseName}){
                 <h1 className="align-center">{course.name}</h1>
                 {course.sections.map((element,index)=>{
                     return (
-                        <li id = {`section${index}`} className="glow-on-hover" key={index} onClick={(e) => handleSectionSelect(e,index)}>{element.title}</li>
+                        <li id = {`section${index}`} className="glow-on-hover" key={index} onClick={(e) => handleSectionSelect(e,index)}>{`${index+1}. ${element.title}`}</li>
                     )
                     })
                 }
@@ -263,21 +266,20 @@ export default function Render({courseName}){
             <div className="content textcontent">
                 <h2>{currentSection.title}</h2>
                 <p>{currentSection.contentText}</p>
+                
                 <button onClick={()=>{backwardPage()}}><i className="fa fa-play" style={{fontsize:'3rem', transform: 'scaleX(-1)'}}></i></button>
                 <button onClick={()=>{forwardPage()}} className='rightitem'><i className="fa fa-play" style={{fontsize:'3rem'}}></i></button>
             </div>
 
             <ul className='images'>
                     {currentSection.imagePaths.map((path)=>{//fix picture
+                           
                             return (
                                 <li key={path}>
-                                    <img src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
+                                    <img src={path} width={300} height={300}/>
                                 </li>
                             )
-                        })}
-                     <li>
-                        <img key={"sad"} src={"https://www.shutterstock.com/image-vector/stacked-tower-abstract-server-hdd-260nw-2099038765.jpg"} width={256} height={256}></img>
-                    </li>               
+                        })}                      
             </ul>
 
             {isExamOpen

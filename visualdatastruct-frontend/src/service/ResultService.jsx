@@ -34,22 +34,31 @@ const ResultService = {
 
 const getFetch =  function(ENDPOINT){
     const token=localStorage.getItem("token");
-    console.log(ENDPOINT);
     return fetch(ENDPOINT, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}`},
        })
        .then((response) => {
-            if(response.status === 403){
-                alert("Lütfen giriş yapınız.")
-                window.location.replace("/");
+            switch (response.status) {
+                case 403:{
+                    alert("Lütfen giriş yapınız.")
+                    window.location.replace("/");
+                    break;
+                }
+                
+                case 404:{
+                    return ["NOT_FOUND"]
+                }
+
+                default:
+                    break;
             }
+
             return response.json()
        })
        .then((responseJson) => {
             ResultService.setResponse(responseJson);
             //console.log(responseJson)
-            console.log(ENDPOINT)
        })
        .catch((error) => {   
             console.error(error);
@@ -66,7 +75,6 @@ const postFetch =  function(DATA, ENDPOINT){
         body:JSON.stringify(DATA),
        })
        .then((response) => {
-            console.log(response);
             if(response.status === 403){
                 alert("Lütfen giriş yapınız.")
                 window.location.replace("/");

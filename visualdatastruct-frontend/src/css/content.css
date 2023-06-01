@@ -73,6 +73,7 @@
 .content>p{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding:1rem 2rem 2rem 2rem;
+  white-space: pre-wrap;
 }
 
 .images{
@@ -86,7 +87,7 @@
 
 .images>li{
   list-style-type: none;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1.5rem 1.1rem 1.5rem 1rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
@@ -133,7 +134,7 @@
 
 
 .bg {
-  background-image: url('../../public/img/bg.jpg');
+  background-image: url('/public/img/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   display: block;
