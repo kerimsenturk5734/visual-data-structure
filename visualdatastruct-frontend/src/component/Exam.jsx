@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom';
 
 import '../css/exam.css';
 
-
 import ResultService from '../service/ResultService';
 
-import { confirmAlert } from 'react-confirm-alert';
 
 import {Course} from '../model/Course';
 import { Question } from '../model/Question';
 import { Choice } from '../model/Choice';
 import { CreateResultRequest } from '../model/Result';
+
 import { useEffect } from 'react';
 
 
@@ -20,16 +18,17 @@ export default function Exam({course, setIsExamOpen}) {
     currentCourse = course;
 
     let questions = [new Question()]
-    questions = currentCourse.questions;
-
+    
+    
     const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
     const [answer, setAnswer] = useState(new Choice());
+    const [questionLevel, setQuestionLevel] = useState(0);
     const [correctCount, setCorrectCount] = useState(0);
     const [result, setResult] = useState(new CreateResultRequest());
     const [isOpen ,setIsOpen] = useState(false);
     const [isOpenConfirm ,setIsOpenConfirm] = useState(false);
     const [isWritedToDb, setIsWritedToDb] = useState(false);
-
+    const [isOpenLevel, setIsOpenLevel] = useState(true); 
     const [questionIndex, setQuestionIndex] = useState(0);
 
     useEffect(() => {
@@ -39,6 +38,14 @@ export default function Exam({course, setIsExamOpen}) {
             
         }
     },[questionIndex])
+
+    useEffect(()=>{
+        if(questionLevel !== 0){
+            questions = filterQuestionsByLevel(currentCourse.questions, questionLevel)
+            console.log(questions);
+            questions = selectRandomQuestions(questions, 5);
+        }
+    },[questionLevel])
 
     const answerQuestion = () => {
         if(answer.isAnswer)
@@ -83,6 +90,39 @@ export default function Exam({course, setIsExamOpen}) {
         
     }
 
+  
+    const filterQuestionsByLevel = (questions, level) => {
+        let filteredQuestions = questions.filter((element) => {
+            return (element.level === level);
+        })
+
+        console.log(filteredQuestions);
+
+        return filteredQuestions;
+    }
+
+    const selectRandomQuestions = (questions, count) => {
+        let selectedIndexs = [];
+        let randomQuestions =[];
+
+        for (let i = 0; i < count; i++) {
+            let randomIndex = Math.floor(Math.random()*questions.length)
+            
+            while(selectedIndexs.indexOf(randomIndex) !== -1){
+                console.log(randomIndex);
+                randomIndex = Math.floor(Math.random()*questions.length)
+            }
+                
+            
+            randomQuestions.push(questions[randomIndex]);
+            console.log(randomQuestions)
+            selectedIndexs.push(randomIndex);
+        }
+
+        return randomQuestions;
+    }
+
+
     return (
        <div className='container-fluid'>
             <div className='exam-root'>
@@ -110,32 +150,59 @@ export default function Exam({course, setIsExamOpen}) {
                         :
 
                         <>
-                            <span><b>{`${questionIndex+1}. ${currentQuestion.description} ?`}</b></span>
-                            <form className='options' id="options" onChange={(e)=>{setAnswer(currentQuestion.choices[e.target.value])}}>
-                                {currentQuestion.choices.map((element, index) => {
-                                    let id = `option${index}`;
-                                    return (
+                            {isOpenLevel
+                                ?
+                                <>
+                                    <span>Lütfen sınav seviyesini seçiniz</span>
+                                    <form className='leveloptions' id="options" onChange={(e)=>{setQuestionLevel(parseInt(e.target.value))}}>
                                         <div className='option'>
-                                            <input type="radio" name="option" id={id} value={index}/>
-                                            <label htmlFor={id}>{element.description}</label>
-                                        </div>  
-                                    )     
-                                })}                         
-                            </form>
-                            <div>
-                                {isOpen
-                                    ?
-                                    <button className="btn-answer-submit col-3" onClick={() => {setIsOpenConfirm(true);}}>  
-                                        Cevapla ve Sınavı Bitir&nbsp;
-                                        <img src="https://cdn-icons-png.flaticon.com/32/65/65578.png"></img>
-                                    </button>
-                                    :
-                                    <button className="btn-answer col-3" onClick={() => {answerQuestion()}}>  
-                                        Cevapla ve İlerle&nbsp;
-                                        <img src="https://cdn-icons-png.flaticon.com/32/1055/1055441.png"></img>
-                                    </button>
-                                }
-                            </div>
+                                            <input type="radio" name="option" value={1}/>
+                                            <label>Kolay</label>
+                                        </div>
+                                        <div className='option'>
+                                            <input type="radio" name="option" value={2}/>
+                                            <label>Orta</label>
+                                        </div>
+                                        <div className='option'>
+                                            <input type="radio" name="option" value={3}/>
+                                            <label>Zor</label>
+                                        </div>                    
+                                    </form>
+                                    <button className="btn-answer-submit col-3 rightitem" onClick={() => {setIsOpenLevel(false);}}>  
+                                        Sınava Başla&nbsp;
+                                    </button>                 
+                                </>
+                                :
+                                <>
+                                    <span><b>{`${questionIndex+1}. ${currentQuestion.description} ?`}</b></span>
+                                    <form className='options' id="options" onChange={(e)=>{setAnswer(currentQuestion.choices[e.target.value])}}>
+                                        {currentQuestion.choices.map((element, index) => {
+                                            let id = `option${index}`;
+                                            return (
+                                                <div className='option'>
+                                                    <input type="radio" name="option" id={id} value={index}/>
+                                                    <label htmlFor={id}>{element.description}</label>
+                                                </div>  
+                                            )     
+                                        })}                         
+                                    </form>
+                                    <div>
+                                        {isOpen
+                                            ?
+                                            <button className="btn-answer-submit col-3" onClick={() => {setIsOpenConfirm(true);}}>  
+                                                Cevapla ve Sınavı Bitir&nbsp;
+                                                <img src="https://cdn-icons-png.flaticon.com/32/65/65578.png"></img>
+                                            </button>
+                                            :
+                                            <button className="btn-answer col-3" onClick={() => {answerQuestion()}}>  
+                                                Cevapla ve İlerle&nbsp;
+                                                <img src="https://cdn-icons-png.flaticon.com/32/1055/1055441.png"></img>
+                                            </button>
+                                        }
+                                    </div>
+                                </>
+
+                            }
                         </>
                         }            
                 </div>

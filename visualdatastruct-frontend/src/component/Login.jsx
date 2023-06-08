@@ -191,7 +191,7 @@ export default function Login() {
     }
   }
   const register = async (e)=>{
-   e.preventDefault();
+
     if(validate()){
       await UserService.register(registerModel.name,registerModel.surname,registerModel.mail,registerModel.password);
       setResponse(UserService.getResponse());
