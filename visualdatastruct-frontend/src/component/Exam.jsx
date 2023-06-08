@@ -17,10 +17,10 @@ export default function Exam({course, setIsExamOpen}) {
     let currentCourse = new Course();
     currentCourse = course;
 
-    let questions = [new Question()]
+    let questions = []
     
-    
-    const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
+    const [currentQuestion, setCurrentQuestion] = useState();
+    const [readyQuestions, setReadyQuestions] = useState([]);
     const [answer, setAnswer] = useState(new Choice());
     const [questionLevel, setQuestionLevel] = useState(0);
     const [correctCount, setCorrectCount] = useState(0);
@@ -32,7 +32,8 @@ export default function Exam({course, setIsExamOpen}) {
     const [questionIndex, setQuestionIndex] = useState(0);
 
     useEffect(() => {
-        if(questionIndex === questions.length-1){//Is it last question
+        console.log(readyQuestions.length)
+        if(questionIndex === readyQuestions.length-1 && readyQuestions.length !== 0){//Is it last question
             setResult(new CreateResultRequest(correctCount, localStorage.getItem("uid"), currentCourse.id));
             setIsOpen(true);
             
@@ -42,8 +43,11 @@ export default function Exam({course, setIsExamOpen}) {
     useEffect(()=>{
         if(questionLevel !== 0){
             questions = filterQuestionsByLevel(currentCourse.questions, questionLevel)
-            console.log(questions);
+            
             questions = selectRandomQuestions(questions, 5);
+            console.log(questions);
+            setReadyQuestions(questions);
+            setCurrentQuestion(questions[0]);
         }
     },[questionLevel])
 
@@ -51,11 +55,11 @@ export default function Exam({course, setIsExamOpen}) {
         if(answer.isAnswer)
             setCorrectCount(correctCount+1);
   
-        if(questionIndex+1 < questions.length){
+        if(questionIndex+1 < readyQuestions.length){
             let temp = questionIndex+1;
             setQuestionIndex(temp);
             document.getElementById("options").reset();
-            setCurrentQuestion(questions[temp]);
+            setCurrentQuestion(readyQuestions[temp]);
         }
 
         
@@ -91,31 +95,28 @@ export default function Exam({course, setIsExamOpen}) {
     }
 
   
-    const filterQuestionsByLevel = (questions, level) => {
-        let filteredQuestions = questions.filter((element) => {
+    const filterQuestionsByLevel = (quests, level) => {
+        let filteredQuestions = quests.filter((element) => {
             return (element.level === level);
         })
 
-        console.log(filteredQuestions);
 
         return filteredQuestions;
     }
 
-    const selectRandomQuestions = (questions, count) => {
+    const selectRandomQuestions = (quests, count) => {
         let selectedIndexs = [];
         let randomQuestions =[];
 
         for (let i = 0; i < count; i++) {
-            let randomIndex = Math.floor(Math.random()*questions.length)
+            let randomIndex = Math.floor(Math.random()*quests.length)
             
             while(selectedIndexs.indexOf(randomIndex) !== -1){
-                console.log(randomIndex);
-                randomIndex = Math.floor(Math.random()*questions.length)
+                randomIndex = Math.floor(Math.random()*quests.length)
             }
                 
             
-            randomQuestions.push(questions[randomIndex]);
-            console.log(randomQuestions)
+            randomQuestions.push(quests[randomIndex]);
             selectedIndexs.push(randomIndex);
         }
 
