@@ -69,7 +69,7 @@ export function Profile(){
     }
     else if(results.length === 0){
         return (
-            <div className=' resultContent container'>
+            <div className='resultContent container-fluid'>
                 <ul className="results">
                     <h1 className="align-center">Sonuçlar</h1>
                     <li className="glow-on-hover">

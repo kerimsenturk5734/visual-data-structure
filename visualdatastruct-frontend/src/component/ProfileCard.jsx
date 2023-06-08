@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ProfileCard({resultCount, totalStar, fiveStarCount}) {
 
-    console.log(totalStar);
+    var avg = (resultCount === 0) ? 0 : totalStar/resultCount;
     return (
         <div className='profile'>
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="" width={100}
@@ -17,7 +17,7 @@ export default function ProfileCard({resultCount, totalStar, fiveStarCount}) {
                         <hr />
                     </div>
                     <div>
-                        <center><span className="fa fa-star fa-spin fa-xl"></span>{totalStar/resultCount}</center>
+                        <center><span className="fa fa-star fa-spin fa-xl"></span>{avg}</center>
                     </div>
                 </div>
                 <div>

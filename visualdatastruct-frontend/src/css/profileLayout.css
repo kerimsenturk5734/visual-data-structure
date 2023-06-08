@@ -15,16 +15,16 @@
   justify-content: flex-start;
   align-self: flex-start;
   row-gap: 10px;
-  padding: 1rem;
+  padding: 2rem;
   margin-top: 8rem;
-  margin-left: 4rem;
+  margin-left: 5rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   border: 3px solid black;
   box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
   top: 0;
   /*bottom:0;*/
-  width: 65%;
+  width: 60%;
   z-index: -1;
 }
 
@@ -54,7 +54,7 @@ li>span{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  
+  margin-left: 5rem;
   align-items: center;
   row-gap: 10px;
   padding: 1rem;
