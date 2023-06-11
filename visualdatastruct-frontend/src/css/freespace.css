@@ -1,0 +1,99 @@
+.leftitem>ul>li{
+    background-color: blueviolet;
+}
+
+.free-space-body{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.free-space{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin:1rem;
+    margin-top: 8rem;
+    padding: 1rem;
+    gap:3rem;
+}
+
+.sketch{
+    width: 65%;
+    padding: 1rem;
+    font-size: larger;
+}
+
+.data-info{
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    gap: 1rem;
+}
+
+.data-info>li{
+    display: flex; 
+    border: 1px dotted black;
+    gap: 1rem;   
+}
+
+.data-info>li>div{
+    padding: 0.5rem;
+}
+
+.options-table{
+    width: 35%;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: larger;
+}
+
+.options-table>form{
+    margin-top: 1rem;
+}
+
+.options-table>span>center{
+    border-radius: 7px;
+    color: white;
+    font-size: xx-large;
+}
+
+.options-table>form>ol{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+}
+
+.options-table>form>ol>li{
+    padding: 1rem;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    
+
+    list-style: none;
+
+    display: flex;
+    gap:1rem;
+}
+.options-table>form>ol>li:hover{
+    font-weight: bold;
+}
+
+.btn-answer:hover{
+    font-weight: bold;
+}
+
+.white-shadow-box{
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;   
+}
+
+#struct{
+    padding: 1rem;
+}
+
+.rect-class{
+    stroke: rgb(0, 0, 0);   /* Set the border color */
+    stroke-width: 2px;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+}
