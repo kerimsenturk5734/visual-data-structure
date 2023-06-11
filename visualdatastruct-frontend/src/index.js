@@ -6,6 +6,7 @@ import Login from './component/Login';
 import CourseMain from './component/CourseMain';
 import reportWebVitals from './reportWebVitals';
 import AuthCheck from './component/AuthCheck';
+import FreeSpace from './component/FreeSpace';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +15,7 @@ root.render(
       <Route path='/' element={<Login />} />
       <Route path='/auth' element={<AuthCheck />} />
       <Route path='/courseMain' element={<CourseMain />} />
+      <Route path='/freespace' element={<FreeSpace />} />
     </Routes>
   </BrowserRouter>  
 );

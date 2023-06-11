@@ -40,13 +40,21 @@ export default function CourseMain() {
         setTimeout(()=>{navigate("/courseMain")},2000)
     }
 
+    const handleContent = (contentName) => {
+        var temp = "";
+        Object.assign(temp, currentContent);
+        temp = contentName;
+
+        setCurrentContent(contentName);
+    }
+
     if(isAuth === true){
         return (
             <div className="courseMainBody">
                 <nav className="container-fluid">
                     <div className="lefttitem">
                         <ul>
-                            <li style={{backgroundColor:'blueviolet'}}>
+                            <li style={{backgroundColor:'blueviolet'}} onClick = {() => {navigate("/freespace")}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/10061/10061724.png" alt='freeSpace' /> 
                                 Go To Free Space
                             </li>
@@ -54,23 +62,23 @@ export default function CourseMain() {
                     </div>
                     <div className="centeritem">
                         <ul>
-                            <li onClick={()=>{setCurrentContent("stack")}}>
+                            <li onClick={()=>{handleContent("stack")}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/2111/2111690.png" alt='Stack' /> 
                                 Stack
                             </li>
-                            <li onClick={()=>{setCurrentContent("queue")}}>
+                            <li onClick={()=>{handleContent("queue")}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/8201/8201691.png" alt='Queue' /> 
                                 Queue
                             </li>
-                            <li onClick={()=>{setCurrentContent("linkedlist")}}>
+                            <li onClick={()=>{handleContent("linkedlist")}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/3462/3462381.png" alt='Linked List' /> 
                                 Linked List
                             </li>
-                            <li onClick={()=>{setCurrentContent("tree")}}>
+                            <li onClick={()=>{handleContent("tree")}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/4160/4160135.png" alt='Tree' /> 
                                 Tree
                             </li>
-                            <li onClick={()=>{setCurrentContent("graph")}}>
+                            <li onClick={()=>{handleContent("graph")}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/4858/4858761.png" alt='Graph' /> 
                                 Graph
                             </li>
@@ -79,7 +87,7 @@ export default function CourseMain() {
                     <div className="rightitem ">
                         <ul>
                             <li className="bg-dark" 
-                                onClick={()=>{setCurrentContent("profile")}}>
+                                onClick={()=>{handleContent("profile")}}>
                                 <i className="fa fa-user fa-xl"></i>
                                 {` ${name} ${surname}`}
                             </li>
