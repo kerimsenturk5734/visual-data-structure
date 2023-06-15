@@ -133,10 +133,7 @@ export default function Login() {
                       id="password"  
                       onInput={(e) => {handle(e,loginModel)}}required/>
                     </li>
-                    <li>
-                    <i/>
-                    <a onClick={ () => changeView("PWReset")} href="#">Forgot Password?</a>
-                    </li>
+                    
                 </ul>
                 </fieldset>
                 <label style={{color:getColor()}}>{getResponse().message}</label>
@@ -145,28 +142,10 @@ export default function Login() {
                   onClick={(e) => {login(e)}}>Login</button>
 
                 <button type="button" onClick={() => changeView("signUp")}>Create An Account</button>
+                <a className='btn' style={{backgroundColor: 'blueviolet', color: 'white'}}
+                  onClick={(e) => {navigate('/freespace')}}>Go To Free Space</a>
             </form>
             )
-        case "PWReset":
-            return (
-          <form>
-          <h2>Reset Password</h2>
-          <fieldset>
-            <legend>Password Reset</legend>
-            <ul>
-              <li>
-                <em>A reset link will be sent to your inbox!</em>
-              </li>
-              <li>
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" required/>
-              </li>
-            </ul>
-          </fieldset>
-          <button>Send Reset Link</button>
-          <button type="button" onClick={ () => changeView("logIn")}>Go Back</button>
-        </form>
-        )
       default:
         break
     }
