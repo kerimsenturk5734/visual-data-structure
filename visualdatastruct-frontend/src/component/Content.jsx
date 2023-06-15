@@ -108,31 +108,28 @@ export function Profile(){
 
 
 
-export default function Render({courseName}){
+export default function Render({contentName}){
     const [course,setCourse] = useState(new Course(0))
     const [currentSection,setCurrentSection]= useState();
     const [sectionIndex,setSectionIndex] = useState(0);
     const [confirm,setConfirm] = useState(false);
-    const [contentName,setContentName] = useState();
     const [isExamOpen,setIsExamOpen] = useState(false);
     const [isCourseFinished, setIsCourseFinished] = useState(false);
     
-    useEffect(()=>{
-        setContentName({})
-        
-        setTimeout(()=>{setContentName(courseName)},10)
-        console.log(contentName);
-    },[courseName])
 
     useEffect(()=>{
         const isItCourse=()=>{
-            return (courseName !== "profile" && courseName !== "content");
+            return (contentName !== "profile" && contentName !== "content");
         }
     
        if(isItCourse()){
             async function fetchData(){
                 await CourseSourceFactory(contentName).then((res)=>{
-                    setCourse(res);                })
+                    var temp = new Course();
+                    Object.assign(temp ,res)
+                    setCourse(temp);   
+                           
+                })
             }   
             fetchData();
        }
@@ -143,7 +140,9 @@ export default function Render({courseName}){
         if(course.id!== 0){
             let section=course.sections[0];
             setSectionIndex(0);
-            setCurrentSection(section);        }
+            setCurrentSection(section);        
+        }
+        console.log(course)
     },[course])
 
     useEffect(()=>{
@@ -226,10 +225,10 @@ export default function Render({courseName}){
         modalContent.render(<Exam course={course} setIsExamOpen={setIsExamOpen}/>)
     }
 
-    if(courseName === "profile"){
+    if(contentName === "profile"){
         return <Profile/>
     }
-    else if(courseName === "content"){
+    else if(contentName === "content"){
         return <Content/>
     }
     if(!confirm){

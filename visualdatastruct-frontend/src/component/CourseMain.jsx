@@ -30,6 +30,10 @@ export default function CourseMain() {
         }
     },[isOpen])
 
+    useEffect(() => {
+        console.log(currentContent);
+    }, [currentContent])
+
     const cancel = () =>{
         setIsOpen(false);
     }
@@ -101,7 +105,7 @@ export default function CourseMain() {
                     </div>
                 </nav>
                 <div>
-                    <Render courseName={currentContent}/>
+                    <Render contentName = {currentContent}/>
                     {isOpen
                         ?
                         <div id="myModal" class="modal container-fluid">
