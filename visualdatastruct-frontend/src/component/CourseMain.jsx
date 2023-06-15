@@ -8,6 +8,8 @@ import '../css/mymodal.css';
 import { useEffect } from 'react';
 //import * as Loader from 'react-loader-spinner'
 
+import CONTENT_NAME from '../utils/CONTENT_NAME';
+
 export default function CourseMain() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -66,23 +68,23 @@ export default function CourseMain() {
                     </div>
                     <div className="centeritem">
                         <ul>
-                            <li onClick={()=>{handleContent("stack")}}>
+                            <li onClick={()=>{handleContent(CONTENT_NAME.STACK)}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/2111/2111690.png" alt='Stack' /> 
                                 Stack
                             </li>
-                            <li onClick={()=>{handleContent("queue")}}>
+                            <li onClick={()=>{handleContent(CONTENT_NAME.QUEUE)}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/8201/8201691.png" alt='Queue' /> 
                                 Queue
                             </li>
-                            <li onClick={()=>{handleContent("linkedlist")}}>
+                            <li onClick={()=>{handleContent(CONTENT_NAME.LINKEDLIST)}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/3462/3462381.png" alt='Linked List' /> 
                                 Linked List
                             </li>
-                            <li onClick={()=>{handleContent("tree")}}>
+                            <li onClick={()=>{handleContent(CONTENT_NAME.TREE)}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/4160/4160135.png" alt='Tree' /> 
                                 Tree
                             </li>
-                            <li onClick={()=>{handleContent("graph")}}>
+                            <li onClick={()=>{handleContent(CONTENT_NAME.GRAPH)}}>
                                 <img src="https://cdn-icons-png.flaticon.com/32/4858/4858761.png" alt='Graph' /> 
                                 Graph
                             </li>

@@ -110,7 +110,7 @@ export default function Login() {
           </form>
         )
         
-        case "logIn":
+      case "logIn":
             return (
             <form onSubmit={()=>{return false}}>
                 <h2>Welcome To Data Structures Course!</h2>
@@ -145,7 +145,7 @@ export default function Login() {
                 <a className='btn' style={{backgroundColor: 'blueviolet', color: 'white'}}
                   onClick={(e) => {navigate('/freespace')}}>Go To Free Space</a>
             </form>
-            )
+        )
       default:
         break
     }

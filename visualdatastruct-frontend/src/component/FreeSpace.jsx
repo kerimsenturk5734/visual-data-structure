@@ -12,6 +12,7 @@ import BinarySearchTree from '../utils/data-structures/tree/binary-search-tree/B
 import '../css/freespace.css';
 import DataStructInfoFactory from './DataStructInfoFactory';
 
+import CONTENT_NAME from '../utils/CONTENT_NAME';
 
 export default function FreeSpace() {
 
@@ -104,7 +105,7 @@ export default function FreeSpace() {
         svg.selectAll("*").remove();
 
         switch(currentDataType){
-            case "stack":{
+            case CONTENT_NAME.STACK:{
 
                 // Convert the stack to an array
                 const stackArray = drawElement.toArray();
@@ -155,7 +156,7 @@ export default function FreeSpace() {
 
                 break;
             };
-            case "queue":{                
+            case CONTENT_NAME.QUEUE:{                
                 const queueArray = drawElement.toArray();
                 const queueSize = queueArray.length;
                 // Set up the SVG container
@@ -205,7 +206,7 @@ export default function FreeSpace() {
                       
                 break;
             };
-            case "linkedlist":{
+            case CONTENT_NAME.LINKEDLIST:{
                 const linkedList = drawElement.toArray();
                 const size = linkedList.length;
             
@@ -265,8 +266,8 @@ export default function FreeSpace() {
                     .attr("height", 400);
 
                     break;
-            }
-            case "tree":{
+            };
+            case CONTENT_NAME.TREE:{
                  const treeRoot = drawElement.root; // Assuming the tree has a "root" property
 
                 // Function to convert the tree data to hierarchical structure required by D3.js
@@ -377,7 +378,8 @@ export default function FreeSpace() {
 
                 treeLayout.size([width, height]);
                 break;
-            }
+            };
+            
             default:break;
         }
     }
@@ -393,19 +395,19 @@ export default function FreeSpace() {
                         
                         <div className="leftitem">
                             <ul>
-                                <li onClick={() => {setCurrentDataType("stack")}}>
+                                <li onClick={() => {setCurrentDataType(CONTENT_NAME.STACK)}}>
                                     <img src="https://cdn-icons-png.flaticon.com/32/2111/2111690.png" alt='Stack' /> 
                                     Stack
                                 </li>
-                                <li onClick={() => {setCurrentDataType("queue")}}>
+                                <li onClick={() => {setCurrentDataType(CONTENT_NAME.QUEUE)}}>
                                     <img src="https://cdn-icons-png.flaticon.com/32/8201/8201691.png" alt='Queue' /> 
                                     Queue
                                 </li>
-                                <li onClick={() => {setCurrentDataType("linkedlist")}}> 
+                                <li onClick={() => {setCurrentDataType(CONTENT_NAME.LINKEDLIST)}}> 
                                     <img src="https://cdn-icons-png.flaticon.com/32/3462/3462381.png" alt='Linked List' /> 
                                     Linked List
                                 </li>
-                                <li onClick={() => {setCurrentDataType("tree")}}>
+                                <li onClick={() => {setCurrentDataType(CONTENT_NAME.TREE)}}>
                                     <img src="https://cdn-icons-png.flaticon.com/32/4160/4160135.png" alt='Tree' /> 
                                     Tree
                                 </li>

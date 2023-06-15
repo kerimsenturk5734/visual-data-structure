@@ -8,6 +8,7 @@ import Queue from '../utils/data-structures/queue/Queue'
 import LinkedList from '../utils/data-structures//linked-list/LinkedList';
 import BinarySearchTree from '../utils/data-structures/tree/binary-search-tree/BinarySearchTree';
 
+import CONTENT_NAME from '../utils/CONTENT_NAME';
 
 function StackOptions({dataStruct}) {
 
@@ -490,20 +491,20 @@ function TreeOptions({dataStruct}) {
   
 export default function DataStructOptionsFactory(props) {
     switch (props.dataType) {
-        case "stack":
+        case CONTENT_NAME.STACK:
             return <StackOptions dataStruct={props.dataStruct}/>;
 
-        case "queue":
+        case CONTENT_NAME.QUEUE:
             return <QueueOptions dataStruct={props.dataStruct}/>;
             
-        case "linkedlist":
+        case CONTENT_NAME.LINKEDLIST:
             return <LinkedListOptions dataStruct={props.dataStruct}/>;
 
-        case "tree":
+        case CONTENT_NAME.TREE:
             return <TreeOptions dataStruct={props.dataStruct}/>;
 
        default:
-            return <StackOptions dataStruct={props.dataStruct}/>;
+            return <>Geçersiz Yapı</>
     }
 }
   

@@ -4,7 +4,7 @@ import Queue from '../utils/data-structures/queue/Queue';
 import LinkedList from '../utils/data-structures/linked-list/LinkedList';
 import BinarySearchTree from '../utils/data-structures/tree/binary-search-tree/BinarySearchTree';
 
-
+import CONTENT_NAME from '../utils/CONTENT_NAME';
 
 
 
@@ -128,19 +128,20 @@ function TreeInfo({data}) {
     </>
   )
 }
+
 export default function DataStructInfoFactory({dataType,data}) {
 
     switch (dataType) {
-        case "stack":
+        case CONTENT_NAME.STACK:
             return <StackInfo data={data}/>;
 
-        case "queue":
+        case CONTENT_NAME.QUEUE:
             return <QueueInfo data={data}/>;
 
-        case "linkedlist":
+        case CONTENT_NAME.LINKEDLIST:
             return <LinkedListInfo data={data}/>;
 
-        case "tree":
+        case CONTENT_NAME.TREE:
             return <TreeInfo data={data}/>;
      
 

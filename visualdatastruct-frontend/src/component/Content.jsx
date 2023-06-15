@@ -13,7 +13,7 @@ import '../css/content.css'
 import ProfileCard from './ProfileCard';
 import Exam from './Exam';
 
-
+import CONTENT_NAME from '../utils/CONTENT_NAME';
 
 export function Content() {
     const [name] = useState(localStorage.getItem("name"));
@@ -119,7 +119,7 @@ export default function Render({contentName}){
 
     useEffect(()=>{
         const isItCourse=()=>{
-            return (contentName !== "profile" && contentName !== "content");
+            return (contentName !== CONTENT_NAME.PROFILE && contentName !== CONTENT_NAME.CONTENT);
         }
     
        if(isItCourse()){
@@ -225,10 +225,10 @@ export default function Render({contentName}){
         modalContent.render(<Exam course={course} setIsExamOpen={setIsExamOpen}/>)
     }
 
-    if(contentName === "profile"){
+    if(contentName === CONTENT_NAME.PROFILE){
         return <Profile/>
     }
-    else if(contentName === "content"){
+    else if(contentName === CONTENT_NAME.CONTENT){
         return <Content/>
     }
     if(!confirm){

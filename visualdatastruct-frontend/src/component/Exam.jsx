@@ -6,7 +6,6 @@ import ResultService from '../service/ResultService';
 
 
 import {Course} from '../model/Course';
-import { Question } from '../model/Question';
 import { Choice } from '../model/Choice';
 import { CreateResultRequest } from '../model/Result';
 
@@ -30,7 +29,6 @@ export default function Exam({course, setIsExamOpen}) {
     const [isWritedToDb, setIsWritedToDb] = useState(false);
     const [isOpenLevel, setIsOpenLevel] = useState(true); 
     const [questionIndex, setQuestionIndex] = useState(0);
-    const [questionNumber, setQuestionNumber] = useState(0)
 
     useEffect(() => {
         if(questionIndex === readyQuestions.length && readyQuestions.length !== 0){//Is it last question
