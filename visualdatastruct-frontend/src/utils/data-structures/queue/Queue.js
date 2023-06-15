@@ -55,4 +55,10 @@ export default class Queue {
     // Return string representation of the queue's linked list.
     return this.linkedList.toString(callback);
   }
+
+  toArray() {
+    return this.linkedList
+      .toArray()
+      .map((linkedListNode) => linkedListNode.value);
+  }
 }
