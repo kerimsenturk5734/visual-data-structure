@@ -30,14 +30,16 @@ export default function Exam({course, setIsExamOpen}) {
     const [isWritedToDb, setIsWritedToDb] = useState(false);
     const [isOpenLevel, setIsOpenLevel] = useState(true); 
     const [questionIndex, setQuestionIndex] = useState(0);
+    const [questionNumber, setQuestionNumber] = useState(0)
 
     useEffect(() => {
-        console.log(readyQuestions.length)
-        if(questionIndex === readyQuestions.length-1 && readyQuestions.length !== 0){//Is it last question
-            setResult(new CreateResultRequest(correctCount, localStorage.getItem("uid"), currentCourse.id));
+        if(questionIndex === readyQuestions.length && readyQuestions.length !== 0){//Is it last question
+            console.log("sınav sonlandırırılıyor")
+            setResult(new CreateResultRequest(correctCount, localStorage.getItem("uid"), currentCourse.id));      
             setIsOpen(true);
-            
         }
+        
+        setAnswer(new Choice());
     },[questionIndex])
 
     useEffect(()=>{
@@ -51,15 +53,26 @@ export default function Exam({course, setIsExamOpen}) {
         }
     },[questionLevel])
 
+    useEffect(() => {
+
+
+    }, [correctCount])
+
+
     const answerQuestion = () => {
-        if(answer.isAnswer)
+
+        if(answer.isAnswer){
             setCorrectCount(correctCount+1);
-  
+        }
+            
         if(questionIndex+1 < readyQuestions.length){
             let temp = questionIndex+1;
             setQuestionIndex(temp);
             document.getElementById("options").reset();
             setCurrentQuestion(readyQuestions[temp]);
+        }
+        else{
+            setQuestionIndex(questionIndex+1)
         }
 
         
@@ -71,6 +84,7 @@ export default function Exam({course, setIsExamOpen}) {
         el.parentNode.removeChild(el.nextSibling);//removing buttons
 
         const sendResult = async (result) => {
+            console.log(result)
             await ResultService.add(result)
             var res = ResultService.getResponse();
             
@@ -82,11 +96,7 @@ export default function Exam({course, setIsExamOpen}) {
             .then((res)=>{
                 el.textContent = "Sonuçlar yazılıyor...";
 
-                if(res.status === 204)
-                    el.textContent = "Sonuçlar başarılı ile oluşturuldu. Sonucunuzu profil sekmenizden inceleyebilirsiniz.";
-
-                else
-                    el.textContent = "Sonuçlar yazılırken bir hata ile karşılaşıldı.";
+                el.textContent = "Sonuçlar başarılı ile oluşturuldu. Sonucunuzu profil sekmenizden inceleyebilirsiniz.";
 
                 setIsWritedToDb(true);
             })
@@ -123,7 +133,11 @@ export default function Exam({course, setIsExamOpen}) {
         return randomQuestions;
     }
 
-
+    const handleOptionChange = (e) => {
+        console.log(e.target);
+        if(e.target.checked)
+            setAnswer(currentQuestion.choices[e.target.value])
+    }
     return (
        <div className='container-fluid'>
             <div className='exam-root'>
@@ -139,7 +153,7 @@ export default function Exam({course, setIsExamOpen}) {
                                 <center id="description"><b>Sınavı bitirmek istediğiniz emin misiniz?</b></center>
                                 <div className='container-fluid confirm-buttons'>
                                     <button className='btn-danger col-2' onClick={()=>{setIsOpenConfirm(false)}}>İptal Et</button>
-                                    <button className='btn-info col-2 rightitem' onClick={()=>{answerQuestion();finishExam()}}>Sınavı Bitir</button>
+                                    <button className='btn-info col-2 rightitem' onClick={()=>{answerQuestion(); setTimeout(finishExam, 500)}}>Sınavı Bitir</button>
                                 </div>
                                 {isWritedToDb
                                     ?
@@ -155,7 +169,7 @@ export default function Exam({course, setIsExamOpen}) {
                                 ?
                                 <>
                                     <span>Lütfen sınav seviyesini seçiniz</span>
-                                    <form className='leveloptions' id="options" onChange={(e)=>{setQuestionLevel(parseInt(e.target.value))}}>
+                                    <form className='leveloptions' id="options" onChange={(e) => setQuestionLevel(parseInt(e.target.value))}>
                                         <div className='option'>
                                             <input type="radio" name="option" value={1}/>
                                             <label>Kolay</label>
@@ -169,19 +183,20 @@ export default function Exam({course, setIsExamOpen}) {
                                             <label>Zor</label>
                                         </div>                    
                                     </form>
-                                    <button className="btn-answer-submit col-3 rightitem" onClick={() => {setIsOpenLevel(false);}}>  
+                                    <button className="btn-answer-submit col-3 rightitem" 
+                                            onClick={() => {document.getElementById('options').reset();setIsOpenLevel(false);}}>  
                                         Sınava Başla&nbsp;
                                     </button>                 
                                 </>
                                 :
                                 <>
                                     <span><b>{`${questionIndex+1}. ${currentQuestion.description} ?`}</b></span>
-                                    <form className='options' id="options" onChange={(e)=>{setAnswer(currentQuestion.choices[e.target.value])}}>
+                                    <form className='options' id="options">
                                         {currentQuestion.choices.map((element, index) => {
-                                            let id = `option${index}`;
+                                            let id = `option-${index}`;
                                             return (
                                                 <div className='option'>
-                                                    <input type="radio" name="option" id={id} value={index}/>
+                                                    <input type="radio" name="option" id={id} value={index} onClick={handleOptionChange}/>
                                                     <label htmlFor={id}>{element.description}</label>
                                                 </div>  
                                             )     
