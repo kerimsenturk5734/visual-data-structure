@@ -1,5 +1,6 @@
 import BinaryTreeNode from '../BinaryTreeNode';
 import Comparator from '../../../utils/comparator/Comparator';
+import * as d3 from 'd3';
 
 export default class BinarySearchTreeNode extends BinaryTreeNode {
   /**
@@ -58,21 +59,31 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
    */
   find(value) {
     // Check the root.
-    if (this.nodeValueComparator.equal(this.value, value)) {
-      return this;
-    }
+    var nodeClass = `.circle-${this.value}`;
+      console.log(this.value);
+      d3.select(nodeClass)
+        .transition()
+        .duration(600) // Set the duration of the animation (in milliseconds)
+        .style("fill", "orange") // Apply scaling to the selected rectangle
+        .transition()
+        .duration(500)
+        .style("fill", "#ccbbaa");
 
-    if (this.nodeValueComparator.lessThan(value, this.value) && this.left) {
-      // Check left nodes.
-      return this.left.find(value);
-    }
+        if (this.nodeValueComparator.equal(this.value, value)) {       
+          return this;
+        }
+  
+        if (this.nodeValueComparator.lessThan(value, this.value) && this.left) {
+          // Check left nodes.
+          return this.left.find(value);
+        }
+  
+        if (this.nodeValueComparator.greaterThan(value, this.value) && this.right) {
+          // Check right nodes.
+          return this.right.find(value);
+        }
 
-    if (this.nodeValueComparator.greaterThan(value, this.value) && this.right) {
-      // Check right nodes.
-      return this.right.find(value);
-    }
-
-    return null;
+        return null;
   }
 
   /**

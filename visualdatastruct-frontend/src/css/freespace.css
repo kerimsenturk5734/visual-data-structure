@@ -18,6 +18,9 @@
 }
 
 .sketch{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
     width: 65%;
     padding: 1rem;
     font-size: larger;
@@ -74,6 +77,7 @@
     display: flex;
     gap:1rem;
 }
+
 .options-table>form>ol>li:hover{
     font-weight: bold;
 }
@@ -93,7 +97,6 @@
 }
 
 .rect-class{
-    stroke: rgb(0, 0, 0);   /* Set the border color */
-    stroke-width: 2px;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
 }
