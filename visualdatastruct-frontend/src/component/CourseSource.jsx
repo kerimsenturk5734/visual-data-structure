@@ -7,9 +7,9 @@ import CONTENT_NAME from '../utils/CONTENT_NAME';
 
 import stackSectionsJson from '../course_section_source/stackSections.json';
 import queueSectionsJson from '../course_section_source/queueSections.json'
-import linkedlistSectionsJson from '../course_section_source/stackSections.json';
-import treeSectionsJson from '../course_section_source/queueSections.json';
-import graphSectionsJson from '../course_section_source/stackSections.json';
+import linkedlistSectionsJson from '../course_section_source/linkedlistSections.json';
+import treeSectionsJson from '../course_section_source/treeSections.json';
+import graphSectionsJson from '../course_section_source/graphSections.json';
 
 
 const course = new Course();
@@ -103,7 +103,7 @@ export default function CourseSourceFactory(courseName){
         case CONTENT_NAME.TREE:
             return TreeSource()
 
-        case CONTENT_NAME.TREE:
+        case CONTENT_NAME.GRAPH:
             return GraphSource()
 
         default:

@@ -1,0 +1,32 @@
+[
+    {
+        "title" : "Graph Nedir?",
+        "contentText" : "Graph, düğümler (vertex) ve bu düğümleri birbirine bağlayan kenarlar (edge) ile temsil edilen bir veri yapısıdır.Düğümler arasındaki bağlantılar, gerçek dünya ilişkilerini ve etkileşimleri modeller.Graph, karmaşık ağ yapılarının temsilinde kullanılır..",
+        "imagePaths" : ["https://logicmojo.com/assets/dist/new_pages/images/graph-data-structures.png"]
+    },
+    {
+        "title" : "Graph Yapısı ve Özellikleri",
+        "contentText" : "Graph, bir düğüm kümesi ve bu düğümleri birbirine bağlayan kenar kümesiyle tanımlanır.Kenarlar, düğümler arasındaki ilişkileri gösterir.Graph, yönlü (directed) veya yönsüz (undirected) olabilir.Yönlü bir graph'da kenarlar tek yönlüdür, yönsüz bir graph'da ise çift yönlüdür.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Graph Çeşitleri",
+        "contentText" : "Yönsüz Graph: Kenarlar, düğümler arasında çift yönlü ilişkiyi temsil eder.\n\nYönlü Graph: Kenarlar, düğümler arasında tek yönlü ilişkiyi temsil eder.\n\nAğırlıklı Graph: Kenarlar, ek olarak bir ağırlık veya maliyet değeri taşır.\n\nÇoklu Graph: Aynı iki düğüm arasında birden fazla kenar olabilir.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Graph Kullanım Alanları",
+        "contentText" : "Sosyal ağ analizi: Graph yapısı, sosyal medya ağlarını ve kullanıcıların ilişkilerini modellemek için kullanılır.\n\nYol bulma problemleri: Graph, rota planlaması ve en kısa yol gibi problemlerin çözümünde kullanılır.\n\nBilgisayar ağları: Ağ cihazlarının bağlantılarını ve iletişim yollarını modellemek için Graph yapısı kullanılır.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Graph Veri Yapısının Avantajları",
+        "contentText" : "Karmaşık ilişkilerin temsili: Graph, birbiriyle bağlantılı verilerin etkileşimlerini ve ilişkilerini doğru bir şekildtemsil eder.\n\nVeri analizi: Graph yapısı, verileri analiz etmek ve ilişkileri keşfetmek için güçlü bir araç sağlar.\n\nHızlı arama: Belirli bir düğüme hızlı erişim sağlamak için Graph yapısı kullanılabilir.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Graph Uygulama Örnekleri",
+        "contentText" : "Haritalar: Şehirler veya bölgeler arasındaki yol ağı, bir Graph yapısı ile modellenebilir.\n\nİnternet: Web sayfaları ve bağlantıları, bir Graph yapısı ile temsil edilir.\n\nGenetik araştırma: Proteinler, genler ve genetik etkileşimlerin modellenmesi için Graph yapısı kullanılabilir.",
+        "imagePaths" : ["https://freepngimg.com/save/99450-images-computer-network-free-download-png-hd/506x363"]
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "title" : "Queue Nedir?",
+        "contentText" : "Queue, veri yapılarından biridir ve verilerin belirli bir düzende saklandığı bir koleksiyon türüdür.FIFO (First-In, First-Out) prensibi ile çalışır, yani ilk giren veri ilk çıkar.Örnek olarak, bir sıra bekleyen kişilerin listesi bir Queue yapısını temsil edebilir.",
+        "imagePaths" : ["https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Data_Queue.svg/1200px-Data_Queue.svg.png"]
+    },
+    {
+        "title" : "Queue Yapısı ve Özellikleri",
+        "contentText": "Queue, genellikle bir dizinin başlangıç ve sonundan erişilebilen bir veri yapısı olarak uygulanır.Enqueue (ekleme) işlemi, Queue'nun sonuna yeni bir veri ekler.Dequeue (çıkarma) işlemi, Queue'nun başından ilk giren veriyi çıkarır.Queue'nun boyutu dinamik olarak büyüyebilir ve küçülebilir.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Queue Kullanım Alanları",
+        "contentText": "İşlem sırasının takip edilmesi gereken senaryolarda Queue kullanılabilir. Örneğin, bir işlem sırası yönetimi için kullanılabilir.İş parçacığı (thread) yönetimi ve senkronizasyonunda Queue yapısı sıklıkla kullanılır.İletişim ve mesajlaşma uygulamalarında, mesaj kuyrukları Queue yapısı ile yönetilebilir.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Queue Veri Yapısının Avantajları",
+        "contentText" : "Queue, verilerin sırasını korur ve sıralı erişime izin verir.FIFO prensibi, bazı senaryolarda işlem sırasını doğru bir şekilde yönetmek için önemlidir.Dinamik boyut özelliği, esneklik sağlar ve verilerin hızlı bir şekilde eklenebilmesini sağlar.",
+        "imagePaths" : []
+    },
+    {
+        "title" : "Queue Veri Yapısının Uygulama Örnekleri",
+        "contentText" : "İşletim sistemlerinde, iş parçacığı yönetimi için kullanılan thread queue'ları vardır.Bankalarda müşteri hizmetlerinde, müşterilerin sırayla hizmet almasını sağlayan bir Queue yapısı kullanılabilir.Bilet satışı gibi etkinliklerde, bir Queue yapısı kullanılarak bilet satış işlemleri sırayla gerçekleştirilebilir.",
+        "imagePaths" : []
+    }
+]

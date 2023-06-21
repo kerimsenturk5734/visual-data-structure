@@ -119,7 +119,8 @@ export default function Render({contentName}){
 
     useEffect(()=>{
         const isItCourse=()=>{
-            return (contentName !== CONTENT_NAME.PROFILE && contentName !== CONTENT_NAME.CONTENT);
+            return ((contentName !== CONTENT_NAME.PROFILE) && 
+                    (contentName !== CONTENT_NAME.CONTENT));
         }
     
        if(isItCourse()){
@@ -190,8 +191,13 @@ export default function Render({contentName}){
     })
     const forwardPage = () => {
         const newIndex=sectionIndex+1;
+        
         if( !(newIndex >= course.sections.length) ){
-            document.getElementById("section"+sectionIndex).style.border = "none";
+            document
+                .getElementById("section"+sectionIndex)
+                .style
+                .border = "none";
+
             setSectionIndex(newIndex);
         }
             
@@ -199,8 +205,13 @@ export default function Render({contentName}){
 
     const backwardPage = () => {
         const newIndex = sectionIndex-1;
+
         if( !(newIndex < 0)){
-            document.getElementById("section"+sectionIndex).style.border = "none";
+            document
+                .getElementById("section"+sectionIndex)
+                .style
+                .border = "none";
+
             setSectionIndex(newIndex);
         }
     }

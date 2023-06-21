@@ -94,7 +94,8 @@ export default function Exam({course, setIsExamOpen}) {
             .then((res)=>{
                 el.textContent = "Sonuçlar yazılıyor...";
 
-                el.textContent = "Sonuçlar başarılı ile oluşturuldu. Sonucunuzu profil sekmenizden inceleyebilirsiniz.";
+                el.textContent = 
+                "Sonuçlar başarılı ile oluşturuldu. Sonucunuzu profil sekmenizden inceleyebilirsiniz.";
 
                 setIsWritedToDb(true);
             })
