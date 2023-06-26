@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  docker-db-datastructurecourse:
+    image: mysql
+    restart: always
+    container_name: docker-db-datastructurecourse
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./sqldump/data.sql:/docker-entrypoint-initdb.d/data.sql   
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+
+  app-server:
+    build: ./visualdatastruct-api
+    container_name: app-server
+    restart: always
+    ports:
+       - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-db-datastructurecourse:3306/datastructurecourse?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      docker-db-datastructurecourse:
+          condition: service_healthy
+  
+  app-client:
+    build: ./visualdatastruct-frontend
+    container_name: app-client
+    ports:
+      - 3000:3000
+    depends_on:
+      - app-server
