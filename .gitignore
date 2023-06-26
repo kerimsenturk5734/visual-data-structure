@@ -1,0 +1,59 @@
+visualdatastruct-api/HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### REACT ###
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+visualdatastruct-frontend/node_modules
+visualdatastruct-frontend/.pnp
+.pnp.js
+
+# testing
+visualdatastruct-frontend/coverage
+
+# production
+visualdatastruct-frontend/build
+
+# misc
+visualdatastruct-frontend/.DS_Store
+visualdatastruct-frontend/.env.local
+visualdatastruct-frontend/.env.development.local
+visualdatastruct-frontend/.env.test.local
+visualdatastruct-frontend/.env.production.local
+
+visualdatastruct-frontend/npm-debug.log*
+visualdatastruct-frontend/yarn-debug.log*
+visualdatastruct-frontend/yarn-error.log*
+

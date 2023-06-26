@@ -112,11 +112,6 @@ export default function FreeSpace() {
                 const stackSize = stackArray.length;
                 // Set up the SVG container
 
-                // Set up the scales
-                const xScale = d3.scaleLinear()
-                    .domain([0, stackSize - 1])
-                    .range([50, 350]);
-
                 const yScale = d3.scaleLinear()
                     .domain([0, stackSize - 1])
                     .range([20, stackSize*70]);
@@ -158,20 +153,11 @@ export default function FreeSpace() {
             };
             case CONTENT_NAME.QUEUE:{                
                 const queueArray = drawElement.toArray();
-                const queueSize = queueArray.length;
-                // Set up the SVG container
-
-                // Set up the scales
-                const xScale = d3.scaleLinear()
-                    .domain([0, queueSize - 1])
-                    .range([50, 350]);
 
                 const yScale = d3.scaleLinear()
                     .domain([0, 3])
                     .range([10, 370]);
-
                 
-
                 // Draw the stack
                 svg.selectAll("rect")
                     .data(queueArray)
@@ -208,14 +194,9 @@ export default function FreeSpace() {
             };
             case CONTENT_NAME.LINKEDLIST:{
                 const linkedList = drawElement.toArray();
-                const size = linkedList.length;
             
                 const nodeRadius = 30;
                 const nodeSpacing = 90;
-
-                const yScale = d3.scaleLinear()
-                    .domain([0, 3])
-                    .range([0, 370]);
 
                 const nodes = svg.selectAll("g")
                     .data(linkedList)
