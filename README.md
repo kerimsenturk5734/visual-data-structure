@@ -3,7 +3,7 @@
 <div id="top"></div>
 
 <p align="center">
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/main/LICENSE.md" target="blank">
+<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/master/LICENSE.md" target="blank">
 <img src="https://img.shields.io/github/license/kerimsenturk5734/visual-data-structure? style=flat-square" alt="visual-data-structure license" />
 </a>
 <a href="https://github.com/kerimsenturk5734/visual-data-structure/fork" target="blank">
@@ -42,13 +42,13 @@ This repository contains a web application to visualize and teach the data struc
 ·<a href="https://github.com/kerimsenturk5734/visual-data-structure/issues">Report Bug</a>·
 <br/>
 <br/><br/>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/main/README-tr.md" target="_blank" rel="noreferrer">
+<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/master/README-tr.md" target="_blank" rel="noreferrer">
 <img src="https://emojigraph.org/media/twitter/flag-turkey_1f1f9-1f1f7.png" alt="tr" width="30" height="30"/>
 
 ```Türkçe (Not Finished yet.)``` 
 
 </a>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/main/README.md" target="_blank" rel="noreferrer">
+<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/master/README.md" target="_blank" rel="noreferrer">
 <img src="https://preview.redd.it/68cdrlhal0hz.png?auto=webp&s=a7e6c8f70065646b72d45fc6ba12c6bb9bf56923" alt="en" width="30" height="20"/>`
 
 ```English```
