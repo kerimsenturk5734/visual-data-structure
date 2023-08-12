@@ -52,7 +52,7 @@ This repository contains a web application to visualize and teach the data struc
 <a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/main/README-tr.md" target="_blank" rel="noreferrer">
 <img src="https://emojigraph.org/media/twitter/flag-turkey_1f1f9-1f1f7.png" alt="tr" width="30" height="30"/>
 
-```Türkçe```
+```Türkçe (Not Finished yet.)``` 
 
 </a>
 <a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/main/README.md" target="_blank" rel="noreferrer">
@@ -104,7 +104,6 @@ This repository contains a web application to visualize and teach the data struc
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-<!--projeyi anlat gif olarak kullanımını göster-->
 
 ## Abstract
 <hr>
@@ -154,7 +153,7 @@ In this project, a web-based application was made to facilitate and facilitate l
 <hr>
 
 1. Docker Engine 
-2. 3000, 8080, 3306 ports must be available. If unavailable one of them you can change the ports inside ```./dockercompose.yml``` 
+2. 3000, 8080, 3306 ports must be available. If unavailable one of them you can change it with available ports in ```./dockercompose.yml``` 
 
 ### Installation
 <hr>
@@ -163,9 +162,16 @@ In this project, a web-based application was made to facilitate and facilitate l
    ```sh
    git clone https://github.com/kerimsenturk5734/visual-data-structure
    ```
-2. ```File > Import > Install > From Existing Installation```  and select the project folder in Eclipse.(If you use IntelliJ, select eclipse project when importing.)
+2. Be sure that Docker Engine is running.
 
-3. Finish.
+3. Run following code in ```./visualdatastruct location```. It will take a while when installing dependencies, be patient.
+   ```sh
+   docker-compose up
+   ```
+
+4. After installation, you will see the green light visualdatastruct container running on Docker Desktop.
+
+5. Open the browser and locate to ```localhost:3000``` (If you have changed the port then put new port instead of 3000)
 
 
 
