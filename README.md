@@ -140,6 +140,18 @@ In this project, a web-based application was made to facilitate and facilitate l
 ### Built With
 <hr>
 
+   
+   <center>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/1200px-Spring_Framework_Logo_2018.svg.png" width="240" height="64" alt="Spring Boot" title="springboot" class="img-small">
+      <img src="https://maven.apache.org/images/maven-logo-black-on-white.png" width="240" height="64" alt="Maven" title="Docker" class="img-small">
+      <br>
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968282.png" width="70" height="70" alt="Java" title="Java" class="img-small">
+      <img src="https://cdn-icons-png.flaticon.com/512/1126/1126012.png " width="70" height="70" alt="React" title="React" class="img-small">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" width="70" height="70" alt="JS" title="JS" class="img-small">
+      <img src="https://d3js.org/logo.svg" width="70" height="64" alt="" title="D3" class="img-small">
+      <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" width="70" height="70" alt="" title="Docker" class="img-small">
+   </center>
+
 ## Getting Started
 
 ### Prerequisites
