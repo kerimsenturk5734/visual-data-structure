@@ -1,9 +1,4 @@
 # visual-data-structure
-<style>
-r { color: Red }
-o { color: Orange }
-g { color: Green }
-</style>
 
 <div id="top"></div>
 
@@ -33,9 +28,7 @@ g { color: Green }
 <h3 align="center">Visual Data Structure</h3>
 
   <p align="center">
-    <a href="https://github.com/kerimsenturk5734/visual-data-structure">
-    <img src="https://raw.githubusercontent.com/kerimsenturk5734/visual-data-structure/main/bin/Debug/books-128.ico" alt="Logo" width="80" height="80">
-    </a>
+   
 
 This repository contains a web application to visualize and teach the data structures.
 <br/>
