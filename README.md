@@ -150,7 +150,7 @@ In this project, a web-based application was made to facilitate and facilitate l
       <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" width="70" height="70" alt="JS" title="JS" class="img-small">
       <img src="https://d3js.org/logo.svg" width="70" height="64" alt="" title="D3" class="img-small">
       <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" width="70" height="70" alt="" title="Docker" class="img-small">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968313.png" width="70" height="70" alt="" title="Docker" class="img-small">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968313.png" width="70" height="70" alt="" title="MySQL" class="img-small">
    </p>
 
 ## Getting Started
