@@ -177,7 +177,7 @@ In this project, a web-based application was made to facilitate and facilitate l
 
 4. After installation, you will see the green light visualdatastruct container running on Docker Desktop.
 
-5. Open the browser and locate to ```localhost:3000``` (If you have changed the port then put new port instead of 3000)
+5. Open the browser and locate to ```localhost:3000``` (If you have changed the port then put into ```./dockercompose.yml``` new port instead of 3000)
 
 
 
