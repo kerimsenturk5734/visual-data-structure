@@ -92,8 +92,9 @@ In this project, a web-based application was made to facilitate and facilitate l
 ### Prerequisites
 <hr>
 
-1. Docker Engine 
-2. 3000, 8080, 3306 ports must be available. If unavailable one of them you can change it with available ports in ```./dockercompose.yml``` 
+1. Docker Engine
+2. Maven 3.0.0+
+3. 3000, 8080, 3306 ports must be available. If unavailable one of them you can change it with available ports in ```./dockercompose.yml``` 
 
 ### Installation
 <hr>
