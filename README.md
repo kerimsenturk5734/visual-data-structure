@@ -1,102 +1,36 @@
-# visual-data-structure
 
 <div id="top"></div>
 
-<p align="center">
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/master/LICENSE.md" target="blank">
-<img src="https://img.shields.io/github/license/kerimsenturk5734/visual-data-structure? style=flat-square" alt="visual-data-structure license" />
-</a>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/fork" target="blank">
-<img src="https://img.shields.io/github/forks/kerimsenturk5734/visual-data-structure?style=flat-square" alt="visual-data-structure forks"/>
-</a>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/kerimsenturk5734/visual-data-structure?style=flat-square" alt="visual-data-structure stars"/>
-</a>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/issues" target="blank">
-<img src="https://img.shields.io/github/issues/kerimsenturk5734/visual-data-structure?style=flat-square" alt="visual-data-structure issues"/>
-</a>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/kerimsenturk5734/visual-data-structure?style=flat-square" alt="visual-data-structure pull-requests"/>
-</a>
-</p>
+<div align="center">
+
+   <h1>Visual Data Structure</h1>
+   <hr>
+
+   ![GitHub Issues](https://img.shields.io/github/issues/kerimsenturk5734/visual-data-structure)
+   ![GitHub License](https://img.shields.io/github/license/kerimsenturk5734/visual-data-structure)
+   ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kerimsenturk5734/visual-data-structure)
+   ![GitHub Forks](https://img.shields.io/github/forks/kerimsenturk5734/visual-data-structure)
+   ![GitHub Stars](https://img.shields.io/github/stars/kerimsenturk5734/visual-data-structure)
+
+   | [English](README.md) | [Turkish](./docs/readme/README_TR.md) |
+
+
+   <a href="https://github.com/kerimsenturk5734/lab-report/tree/master/docs">
+      <strong>Explore the more documentation »</strong>
+   </a>
+
+   This repository contains a web application to visualize and teach the data structures.
+
+   ```🟥This project developed for "Project-1" course  in grade 3 term spring.🟥```
+</div>
 
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
-
-<h3 align="center">Visual Data Structure</h3>
-
-  <p align="center">
-   
-
-This repository contains a web application to visualize and teach the data structures.
-<br/>
-
-```🟥This project developed for "Project-1" course  in grade 3 term spring.🟥``` <br>
-
-<hr>
-<br />
-<a href="https://github.com/kerimsenturk5734/visual-data-structure"><strong>Explore the docs »</strong></a>
-<br/>
-·<a href="https://github.com/kerimsenturk5734/visual-data-structure/issues">Report Bug</a>·
-<br/>
-<br/><br/>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/master/README-tr.md" target="_blank" rel="noreferrer">
-<img src="https://emojigraph.org/media/twitter/flag-turkey_1f1f9-1f1f7.png" alt="tr" width="30" height="30"/>
-
-```Türkçe (Not Finished yet.)``` 
-
-</a>
-<a href="https://github.com/kerimsenturk5734/visual-data-structure/blob/master/README.md" target="_blank" rel="noreferrer">
-<img src="https://preview.redd.it/68cdrlhal0hz.png?auto=webp&s=a7e6c8f70065646b72d45fc6ba12c6bb9bf56923" alt="en" width="30" height="20"/>`
-
-```English```
-
-</a>
-</div>
-
-<!-- TABLE OF CONTENTS -->
-<div align="left">
-    <details>
-      <summary><h1>Contents</h1></summary>
-      <hr>
-      <ol>
-        <li>
-          <a href="#about-the-project">About The Project</a>
-          <ul>
-            <li><a href="#abstract">Abstract</a></li>
-            <li>
-               <a href="#project-details">Project Details</a>
-               <ul>
-                  <li><a href="#database">Database</a></li>
-                  <li><a href="#api">API</a></li>
-                  <li><a href="#swagger">Frontend</a></li>
-                  <li><a href="#react">Docker</a></li>
-               </ul>
-            </li>
-            <li>
-               <a href="#built-with">Built With</a> 
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#getting-started">Getting Started</a>
-          <ul>
-            <li><a href="#prerequisites">Prerequisites</a></li>
-            <li><a href="#installation">Installation</a></li>
-          </ul>
-        </li>
-        <li><a href="#contact">Contact</a></li>
-      </ol>
-    </details>
-
-
 
 
 <!-- ABOUT THE PROJECT -->
 # About The Project
-
 
 ## Abstract
 <hr>
@@ -168,16 +102,22 @@ In this project, a web-based application was made to facilitate and facilitate l
    ```sh
    git clone https://github.com/kerimsenturk5734/visual-data-structure
    ```
-2. Be sure that Docker Engine is running.
+   
+2. Run following code in ```./visualdatastruct-api``` to build api:
+   ```sh
+   mvn clean install -DskipTests
+   ```
+   
+3. Be sure that Docker Engine is running.
 
-3. Run following code in ```./visualdatastruct location```. It will take a while when installing dependencies, be patient.
+4. Run following code in root location. It will take a while when installing dependencies, be patient.
    ```sh
    docker-compose up
    ```
 
-4. After installation, you will see the green light visualdatastruct container running on Docker Desktop.
+5. After installation, you will see the green light visualdatastruct container running on Docker Desktop.
 
-5. Open the browser and locate to ```localhost:3000``` (If you have changed the port then put into ```./dockercompose.yml``` new port instead of 3000)
+6. Open the browser and locate to ```localhost:3000``` (If you have changed the port then put into ```./dockercompose.yml``` new port instead of 3000)
 
 
 
@@ -191,7 +131,7 @@ In this project, a web-based application was made to facilitate and facilitate l
    <a href="https://twitter.com/kersenturk57" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="kersenturk57" height="30" width="40" /></a>
    <a href="https://www.linkedin.com/in/kerim-%c5%9fent%c3%bcrk-784a3220a/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="kerim-%c5%9fent%c3%bcrk-784a3220a" height="30" width="40" /></a>
    <a href="https://stackoverflow.com/users/16939669" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="16939669" height="30" width="40" /></a>
-   <a href="https://www.instagram.com/s1r_ker1m/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="kerimm_sntrk" height="30" width="40" /></a>
+   <a href="https://www.instagram.com/_kerimsntrk" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="kerimm_sntrk" height="30" width="40" /></a>
 </p>
 <hr>
 <p align="right">(<a href="#top">back to top</a>)</p>
